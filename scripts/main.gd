@@ -8,30 +8,41 @@ const XP_PICKUP_SCENE := preload("res://scenes/xp_pickup.tscn")
 @export var speed_upgrade_amount: float = 25.0
 @export var attack_damage_upgrade_amount: int = 1
 @export var max_health_upgrade_amount: int = 1
+@export var enemies_per_wave: int = 3
 
 var enemies_defeated: int = 0
 var xp: int = 0
 var level: int = 1
+var wave: int = 1
 var choosing_upgrade: bool = false
 
 @onready var defeated_count_label: Label = $GameUI/DefeatedCountLabel
 @onready var xp_count_label: Label = $GameUI/XPCountLabel
 @onready var level_label: Label = $GameUI/LevelLabel
+@onready var wave_label: Label = $GameUI/WaveLabel
 @onready var level_up_label: Label = $GameUI/LevelUpLabel
 @onready var upgrade_choice_label: Label = $GameUI/UpgradeChoiceLabel
 @onready var enemy_spawn_point: Node2D = $EnemySpawnPoint
 @onready var player = $Player
+@onready var enemy = $Enemy
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_update_defeated_count()
 	_update_xp_count()
 	_update_level()
+	_update_wave()
+	_configure_enemy(enemy)
 	level_up_label.visible = false
 	upgrade_choice_label.visible = false
 
 func enemy_defeated(defeat_position: Vector2) -> void:
 	enemies_defeated += 1
+	var next_wave := int(enemies_defeated / enemies_per_wave) + 1
+	if next_wave != wave:
+		wave = next_wave
+		_update_wave()
+		print("Wave: %s" % wave)
 	_update_defeated_count()
 	print("Enemies defeated: %s" % enemies_defeated)
 	_spawn_xp_pickup(defeat_position)
@@ -63,9 +74,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _respawn_enemy_after_delay() -> void:
 	await get_tree().create_timer(enemy_respawn_delay, false).timeout
-	var enemy := ENEMY_SCENE.instantiate()
-	enemy.position = enemy_spawn_point.position
-	add_child(enemy)
+	var new_enemy := ENEMY_SCENE.instantiate()
+	new_enemy.position = enemy_spawn_point.position
+	_configure_enemy(new_enemy)
+	add_child(new_enemy)
 
 func _spawn_xp_pickup(spawn_position: Vector2) -> void:
 	var pickup := XP_PICKUP_SCENE.instantiate()
@@ -80,6 +92,13 @@ func _update_xp_count() -> void:
 
 func _update_level() -> void:
 	level_label.text = "Level: %s" % level
+
+func _update_wave() -> void:
+	wave_label.text = "Wave: %s" % wave
+
+func _configure_enemy(enemy_node: Node) -> void:
+	if enemy_node.has_method("configure_for_wave"):
+		enemy_node.configure_for_wave(wave)
 
 func _start_upgrade_choice() -> void:
 	if choosing_upgrade:

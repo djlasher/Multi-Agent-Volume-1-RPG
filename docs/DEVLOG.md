@@ -167,3 +167,20 @@ Fix:
 
 - Marked gameplay scene roots as pausable so player, enemy, and XP pickup behavior stop during upgrade selection.
 - Made enemy respawn timers pause during upgrade selection.
+
+## Wave Scaling Placeholder
+
+Goal: add simple one-enemy wave scaling without changing the spawn model.
+
+Added:
+
+- Wave tracking starting at wave 1.
+- Wave increase after every 3 defeated enemies.
+- Slight speed and health increases for newly spawned enemies on later waves.
+- A simple wave label.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Defeat 3 enemies and confirm the wave label changes to wave 2.
+- Confirm newly spawned enemies are slightly faster and tougher.

@@ -38,3 +38,8 @@ func take_damage(amount: int) -> void:
 		if get_tree().current_scene.has_method("enemy_defeated"):
 			get_tree().current_scene.enemy_defeated(global_position)
 		queue_free()
+
+func configure_for_wave(wave: int) -> void:
+	speed = 45.0 + ((wave - 1) * 10.0)
+	max_health = 2 + (wave - 1)
+	health = max_health

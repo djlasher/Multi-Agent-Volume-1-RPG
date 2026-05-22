@@ -22,6 +22,8 @@ This project currently targets Godot `4.6.3`.
 - Press Space or left mouse click near the enemy to attack.
 - The enemy should be defeated after two successful hits.
 - The defeated count should update, and a new enemy should respawn after a short delay.
+- The wave should increase after every 3 defeated enemies.
+- Later waves should make newly spawned enemies slightly faster and tougher.
 - A small blue XP pickup should appear where the enemy was defeated.
 - Touch the XP pickup to increase the XP count.
 - At 3 XP, the player should level up and choose an upgrade with 1, 2, or 3.

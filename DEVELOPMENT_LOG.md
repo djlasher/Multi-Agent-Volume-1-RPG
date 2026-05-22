@@ -158,3 +158,17 @@ Changed:
 Result: the prototype now has a basic choice-based level-up loop without menus, art assets, rarity systems, or complex upgrade trees.
 
 Follow-up fix: gameplay nodes now explicitly use pausable processing so the player, enemy, pickups, and respawn timer stop while the upgrade choice is active.
+
+## 2026-05-22 - Wave Scaling Placeholder
+
+Goal: add simple wave scaling while keeping the one-enemy respawn loop.
+
+Changed:
+
+- Added wave tracking starting at wave 1.
+- Increased the wave after every 3 defeated enemies.
+- Added a wave label.
+- Configured newly spawned enemies with small speed and health increases based on wave.
+- Updated manual Godot test steps.
+
+Result: the prototype now has basic difficulty growth without multiple enemies, new enemy types, art assets, fancy UI, or complex spawn systems.

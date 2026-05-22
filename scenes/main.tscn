@@ -51,6 +51,13 @@ offset_right=220.0
 offset_bottom=98.0
 text="Level: 1"
 
+[node name="WaveLabel" type="Label" parent="GameUI"]
+offset_left=16.0
+offset_top=100.0
+offset_right=220.0
+offset_bottom=126.0
+text="Wave: 1"
+
 [node name="LevelUpLabel" type="Label" parent="GameUI"]
 visible=false
 offset_left=324.0

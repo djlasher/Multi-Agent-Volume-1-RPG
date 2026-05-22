@@ -19,7 +19,8 @@ This project currently targets Godot `4.6.3`.
 ## Current Gameplay Test
 
 - The red enemy placeholder should slowly move toward the green player placeholder.
-- Press Space or left mouse click near the enemy to attack.
+- Press Space or left mouse click near the enemy to attack; attacks have a short cooldown.
+- The enemy should briefly change color/scale and be nudged back when hit.
 - The enemy should be defeated after two successful hits.
 - The defeated count should update, and a new enemy should respawn after a short delay.
 - The wave should increase after every 3 defeated enemies.

@@ -202,3 +202,21 @@ Current test:
 - Confirm two enemies are active on wave 1.
 - Defeat enemies and confirm replacements spawn after a short delay.
 - Reach later waves and confirm more enemies can be active without changing enemy type.
+
+## Combat Feel Placeholder
+
+Goal: make basic combat easier to read without adding real animations or effects.
+
+Added:
+
+- A short player attack cooldown.
+- Console feedback when the player attacks.
+- Enemy hit color/scale feedback.
+- Slight enemy knockback on hit.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Attack near enemies with Space or left mouse click.
+- Confirm attacks do not fire every frame.
+- Confirm hit enemies briefly pulse and get nudged back.

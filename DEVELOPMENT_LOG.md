@@ -186,3 +186,17 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: the prototype now supports small groups of the same enemy without new enemy types, art assets, pathfinding, object pooling, or complex spawn management.
+
+## 2026-05-22 - Combat Feel Placeholder
+
+Goal: improve basic combat readability while keeping placeholder-only visuals.
+
+Changed:
+
+- Added a short player attack cooldown.
+- Kept the existing attack range flash and added attack log feedback.
+- Added enemy hit color/scale feedback.
+- Added slight enemy knockback on hit.
+- Updated manual Godot test steps.
+
+Result: combat is less spammy and easier to read without sprites, animations, sound, particles, or complex combat systems.

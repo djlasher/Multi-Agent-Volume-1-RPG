@@ -3,10 +3,12 @@ extends CharacterBody2D
 @export var speed: float = 220.0
 @export var max_health: int = 3
 @export var attack_damage: int = 1
+@export var attack_cooldown: float = 0.35
 
 var health: int = max_health
 var hit_flash_time: float = 0.0
 var attack_flash_time: float = 0.0
+var attack_cooldown_remaining: float = 0.0
 var game_over: bool = false
 
 @onready var body: ColorRect = $Body
@@ -23,6 +25,9 @@ func _physics_process(_delta: float) -> void:
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = direction * speed
 	move_and_slide()
+
+	if attack_cooldown_remaining > 0.0:
+		attack_cooldown_remaining -= _delta
 
 	if hit_flash_time > 0.0:
 		hit_flash_time -= _delta
@@ -58,8 +63,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_attack()
 
 func _attack() -> void:
+	if attack_cooldown_remaining > 0.0:
+		return
+
+	attack_cooldown_remaining = attack_cooldown
 	attack_visual.visible = true
 	attack_flash_time = 0.12
+	print("Player attack")
 
 	for area in attack_area.get_overlapping_areas():
 		if area.has_method("take_damage"):

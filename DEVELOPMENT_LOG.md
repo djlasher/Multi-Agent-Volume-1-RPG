@@ -143,3 +143,16 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: the prototype now has a basic progression loop without upgrade choices, menus, art assets, multiple upgrades, or complex progression systems.
+
+## 2026-05-22 - Upgrade Choice Placeholder
+
+Goal: replace the automatic level-up speed upgrade with a simple upgrade choice.
+
+Changed:
+
+- Paused gameplay when XP reaches 3 and a level-up starts.
+- Added keyboard choices for speed, attack damage, or max health plus heal.
+- Applied the selected upgrade and resumed gameplay.
+- Updated manual Godot test steps.
+
+Result: the prototype now has a basic choice-based level-up loop without menus, art assets, rarity systems, or complex upgrade trees.

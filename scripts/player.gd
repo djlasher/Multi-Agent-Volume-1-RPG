@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 220.0
 @export var max_health: int = 3
+@export var attack_damage: int = 1
 
 var health: int = max_health
 var hit_flash_time: float = 0.0
@@ -62,7 +63,7 @@ func _attack() -> void:
 
 	for area in attack_area.get_overlapping_areas():
 		if area.has_method("take_damage"):
-			area.take_damage(1)
+			area.take_damage(attack_damage)
 
 func _show_game_over() -> void:
 	game_over = true

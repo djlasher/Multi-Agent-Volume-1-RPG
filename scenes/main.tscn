@@ -57,7 +57,20 @@ offset_left=324.0
 offset_top=120.0
 offset_right=636.0
 offset_bottom=168.0
-text="Level Up! Speed +25"
+text="Level Up!"
+horizontal_alignment=1
+vertical_alignment=1
+
+[node name="UpgradeChoiceLabel" type="Label" parent="GameUI"]
+visible=false
+offset_left=260.0
+offset_top=170.0
+offset_right=700.0
+offset_bottom=260.0
+text="Choose Upgrade
+1 - Increase movement speed
+2 - Increase attack damage
+3 - Increase max health and heal"
 horizontal_alignment=1
 vertical_alignment=1
 

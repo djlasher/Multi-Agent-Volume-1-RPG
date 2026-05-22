@@ -145,3 +145,20 @@ Current test:
 - Collect 3 XP pickups by defeating enemies and touching their drops.
 - Confirm XP resets to 0, level increases, and level-up feedback appears.
 - Confirm player movement feels slightly faster after leveling.
+
+## Upgrade Choice Placeholder
+
+Goal: replace the automatic level-up upgrade with a simple keyboard choice.
+
+Added:
+
+- A paused upgrade choice state when XP reaches 3.
+- Three keyboard choices: speed, attack damage, or max health plus heal.
+- Upgrade feedback using the existing label style.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Collect 3 XP pickups.
+- Confirm gameplay pauses and upgrade choices appear.
+- Press 1, 2, or 3 and confirm gameplay resumes with the selected upgrade.

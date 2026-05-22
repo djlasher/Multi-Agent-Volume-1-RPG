@@ -129,3 +129,17 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: the prototype now tracks basic XP from enemy defeats without level-up choices, multiple pickup types, art assets, or complex progression systems.
+
+## 2026-05-22 - Level Up Placeholder
+
+Goal: add a minimal automatic level-up loop from collected XP.
+
+Changed:
+
+- Triggered level-up when XP reaches 3.
+- Reset XP to 0 after leveling.
+- Added player level tracking and labels.
+- Increased player movement speed slightly on level-up.
+- Updated manual Godot test steps.
+
+Result: the prototype now has a basic progression loop without upgrade choices, menus, art assets, multiple upgrades, or complex progression systems.

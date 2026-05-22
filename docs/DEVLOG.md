@@ -127,3 +127,21 @@ Current test:
 - Defeat the enemy with Space or left mouse click.
 - Touch the blue XP pickup and confirm the XP count increases.
 - Confirm enemy respawn, chase, contact damage, Game Over, and R restart still work.
+
+## Level Up Placeholder
+
+Goal: add the smallest automatic level-up loop from XP.
+
+Added:
+
+- Level tracking starting at level 1.
+- Level-up trigger at 3 XP.
+- Automatic movement speed increase on level-up.
+- Simple level and level-up labels.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Collect 3 XP pickups by defeating enemies and touching their drops.
+- Confirm XP resets to 0, level increases, and level-up feedback appears.
+- Confirm player movement feels slightly faster after leveling.

@@ -81,4 +81,6 @@ func _show_game_over() -> void:
 	body.color = Color(1.0, 0.22, 0.22, 1)
 	if game_over_label != null:
 		game_over_label.visible = true
+	if get_tree().current_scene.has_method("player_game_over"):
+		get_tree().current_scene.player_game_over()
 	print("Game Over - press R to restart")

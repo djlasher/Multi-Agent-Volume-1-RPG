@@ -17,13 +17,17 @@ var xp: int = 0
 var level: int = 1
 var wave: int = 1
 var choosing_upgrade: bool = false
+var elapsed_time: float = 0.0
+var run_over: bool = false
 
 @onready var defeated_count_label: Label = $GameUI/DefeatedCountLabel
 @onready var xp_count_label: Label = $GameUI/XPCountLabel
 @onready var level_label: Label = $GameUI/LevelLabel
 @onready var wave_label: Label = $GameUI/WaveLabel
+@onready var time_label: Label = $GameUI/TimeLabel
 @onready var level_up_label: Label = $GameUI/LevelUpLabel
 @onready var upgrade_choice_label: Label = $GameUI/UpgradeChoiceLabel
+@onready var run_summary_label: Label = $GameUI/RunSummaryLabel
 @onready var enemy_spawn_point: Node2D = $EnemySpawnPoint
 @onready var player = $Player
 @onready var enemy = $Enemy
@@ -34,10 +38,19 @@ func _ready() -> void:
 	_update_xp_count()
 	_update_level()
 	_update_wave()
+	_update_time()
 	_configure_enemy(enemy)
 	_fill_enemy_count()
 	level_up_label.visible = false
 	upgrade_choice_label.visible = false
+	run_summary_label.visible = false
+
+func _process(delta: float) -> void:
+	if run_over or choosing_upgrade:
+		return
+
+	elapsed_time += delta
+	_update_time()
 
 func enemy_defeated(defeat_position: Vector2) -> void:
 	enemies_defeated += 1
@@ -110,6 +123,19 @@ func _spawn_xp_pickup(spawn_position: Vector2) -> void:
 	pickup.position = spawn_position
 	add_child(pickup)
 
+func player_game_over() -> void:
+	if run_over:
+		return
+
+	run_over = true
+	run_summary_label.text = "Run Summary\nTime: %s\nEnemies defeated: %s\nLevel reached: %s\nWave reached: %s" % [
+		_format_time(elapsed_time),
+		enemies_defeated,
+		level,
+		wave,
+	]
+	run_summary_label.visible = true
+
 func _update_defeated_count() -> void:
 	defeated_count_label.text = "Enemies defeated: %s" % enemies_defeated
 
@@ -121,6 +147,15 @@ func _update_level() -> void:
 
 func _update_wave() -> void:
 	wave_label.text = "Wave: %s" % wave
+
+func _update_time() -> void:
+	time_label.text = "Time: %s" % _format_time(elapsed_time)
+
+func _format_time(time_seconds: float) -> String:
+	var total_seconds := int(time_seconds)
+	var minutes := int(total_seconds / 60)
+	var seconds := total_seconds % 60
+	return "%02d:%02d" % [minutes, seconds]
 
 func _configure_enemy(enemy_node: Node) -> void:
 	if enemy_node.has_method("configure_for_wave"):

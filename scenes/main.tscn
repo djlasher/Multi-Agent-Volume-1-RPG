@@ -58,6 +58,13 @@ offset_right=220.0
 offset_bottom=126.0
 text="Wave: 1"
 
+[node name="TimeLabel" type="Label" parent="GameUI"]
+offset_left=16.0
+offset_top=128.0
+offset_right=220.0
+offset_bottom=154.0
+text="Time: 00:00"
+
 [node name="LevelUpLabel" type="Label" parent="GameUI"]
 visible=false
 offset_left=324.0
@@ -78,6 +85,16 @@ text="Choose Upgrade
 1 - Increase movement speed
 2 - Increase attack damage
 3 - Increase max health and heal"
+horizontal_alignment=1
+vertical_alignment=1
+
+[node name="RunSummaryLabel" type="Label" parent="GameUI"]
+visible=false
+offset_left=300.0
+offset_top=320.0
+offset_right=660.0
+offset_bottom=440.0
+text="Run Summary"
 horizontal_alignment=1
 vertical_alignment=1
 

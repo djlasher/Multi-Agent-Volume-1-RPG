@@ -237,3 +237,21 @@ Current test:
 - Run the headless scene launch validation.
 - Run the smoke test script.
 - Confirm both commands exit successfully.
+
+## Run Timer And Summary Placeholder
+
+Goal: add a minimal run timer and Game Over summary.
+
+Added:
+
+- Elapsed time tracking during active gameplay.
+- A simple time label.
+- Timer pause during upgrade choice.
+- Run summary on Game Over with time, enemies defeated, level reached, and wave reached.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Confirm the timer counts up during gameplay.
+- Trigger a level-up choice and confirm the timer pauses.
+- Reach Game Over and confirm the summary appears.

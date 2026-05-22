@@ -212,3 +212,18 @@ Changed:
 - Updated workflow docs so future milestones run both headless scene validation and the smoke test.
 
 Result: the project now has a simple headless smoke test without introducing a full test framework.
+
+## 2026-05-22 - Run Timer And Summary Placeholder
+
+Goal: add a simple run timer and Game Over summary.
+
+Changed:
+
+- Added elapsed run time tracking during active gameplay.
+- Added a time label.
+- Paused the timer during upgrade choice.
+- Stopped the timer on Game Over.
+- Added a simple run summary with time, enemies defeated, level reached, and wave reached.
+- Updated smoke test expected nodes and manual Godot test steps.
+
+Result: the prototype now reports basic run context without menus, save data, leaderboards, art assets, or complex scoring.

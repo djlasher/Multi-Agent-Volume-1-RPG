@@ -62,7 +62,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		)
 
 func _respawn_enemy_after_delay() -> void:
-	await get_tree().create_timer(enemy_respawn_delay).timeout
+	await get_tree().create_timer(enemy_respawn_delay, false).timeout
 	var enemy := ENEMY_SCENE.instantiate()
 	enemy.position = enemy_spawn_point.position
 	add_child(enemy)

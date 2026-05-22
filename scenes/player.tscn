@@ -9,6 +9,7 @@ size=Vector2(24, 24)
 size=Vector2(72, 72)
 
 [node name="Player" type="CharacterBody2D"]
+process_mode=1
 script=ExtResource("1_player_script")
 
 [node name="Body" type="ColorRect" parent="."]

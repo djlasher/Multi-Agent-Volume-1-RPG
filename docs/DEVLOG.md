@@ -162,3 +162,8 @@ Current test:
 - Collect 3 XP pickups.
 - Confirm gameplay pauses and upgrade choices appear.
 - Press 1, 2, or 3 and confirm gameplay resumes with the selected upgrade.
+
+Fix:
+
+- Marked gameplay scene roots as pausable so player, enemy, and XP pickup behavior stop during upgrade selection.
+- Made enemy respawn timers pause during upgrade selection.

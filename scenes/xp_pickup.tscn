@@ -6,6 +6,7 @@
 size=Vector2(14, 14)
 
 [node name="XPPickup" type="Area2D"]
+process_mode=1
 script=ExtResource("1_xp_pickup_script")
 
 [node name="Body" type="ColorRect" parent="."]

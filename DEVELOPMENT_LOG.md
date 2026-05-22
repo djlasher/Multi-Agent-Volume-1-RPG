@@ -156,3 +156,5 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: the prototype now has a basic choice-based level-up loop without menus, art assets, rarity systems, or complex upgrade trees.
+
+Follow-up fix: gameplay nodes now explicitly use pausable processing so the player, enemy, pickups, and respawn timer stop while the upgrade choice is active.

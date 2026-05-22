@@ -6,6 +6,7 @@
 size=Vector2(28, 28)
 
 [node name="Enemy" type="Area2D"]
+process_mode=1
 script=ExtResource("1_enemy_script")
 
 [node name="Body" type="ColorRect" parent="."]

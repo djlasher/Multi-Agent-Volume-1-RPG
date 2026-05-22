@@ -43,3 +43,10 @@ For command-line Godot checks, either:
 
 - skip Godot execution, or
 - use the full local path to `godot_console.exe`.
+
+Future milestones should run both checks:
+
+```powershell
+& "C:\Users\Clay\Desktop\godot\godot_console.exe" --headless --path "D:\Github Repos\Multi Agent Volume 1 RPG" res://scenes/main.tscn --quit-after 1
+& "C:\Users\Clay\Desktop\godot\godot_console.exe" --headless --path "D:\Github Repos\Multi Agent Volume 1 RPG" -s res://tests/smoke_test.gd
+```

@@ -200,3 +200,15 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: combat is less spammy and easier to read without sprites, animations, sound, particles, or complex combat systems.
+
+## 2026-05-22 - Smoke Test Placeholder
+
+Goal: add a lightweight repeatable validation script for future milestones.
+
+Changed:
+
+- Added `tests/smoke_test.gd`.
+- Checked core resources, main scene instantiation, expected nodes, and expected scripts.
+- Updated workflow docs so future milestones run both headless scene validation and the smoke test.
+
+Result: the project now has a simple headless smoke test without introducing a full test framework.

@@ -220,3 +220,20 @@ Current test:
 - Attack near enemies with Space or left mouse click.
 - Confirm attacks do not fire every frame.
 - Confirm hit enemies briefly pulse and get nudged back.
+
+## Smoke Test Placeholder
+
+Goal: add a lightweight headless validation script for future milestones.
+
+Added:
+
+- A Godot smoke test script at `tests/smoke_test.gd`.
+- Resource checks for core scenes and scripts.
+- Main scene instantiation checks.
+- Expected node/script checks for the current prototype.
+
+Current test:
+
+- Run the headless scene launch validation.
+- Run the smoke test script.
+- Confirm both commands exit successfully.

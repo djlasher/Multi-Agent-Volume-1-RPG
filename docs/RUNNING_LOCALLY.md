@@ -19,6 +19,8 @@ This project currently targets Godot `4.6.3`.
 ## Current Gameplay Test
 
 - The red enemy placeholder should slowly move toward the green player placeholder.
+- Press Space or left mouse click near the enemy to attack.
+- The enemy should be defeated after two successful hits.
 - Move the green player placeholder into the red enemy placeholder.
 - The player should briefly flash yellow.
 - The console should print the player's remaining health.

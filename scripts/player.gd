@@ -5,9 +5,12 @@ extends CharacterBody2D
 
 var health: int = max_health
 var hit_flash_time: float = 0.0
+var attack_flash_time: float = 0.0
 var game_over: bool = false
 
 @onready var body: ColorRect = $Body
+@onready var attack_area: Area2D = $AttackArea
+@onready var attack_visual: ColorRect = $AttackArea/AttackVisual
 @onready var game_over_label: Label = get_tree().current_scene.get_node_or_null("GameUI/GameOverLabel") as Label
 
 func _physics_process(_delta: float) -> void:
@@ -25,6 +28,11 @@ func _physics_process(_delta: float) -> void:
 		if hit_flash_time <= 0.0:
 			body.color = Color(0.22, 0.74, 0.52, 1)
 
+	if attack_flash_time > 0.0:
+		attack_flash_time -= _delta
+		if attack_flash_time <= 0.0:
+			attack_visual.visible = false
+
 func take_hit() -> void:
 	if game_over:
 		return
@@ -38,11 +46,23 @@ func take_hit() -> void:
 		_show_game_over()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not game_over:
+	if game_over:
+		if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:
+			get_tree().reload_current_scene()
 		return
 
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:
-		get_tree().reload_current_scene()
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
+		_attack()
+	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_attack()
+
+func _attack() -> void:
+	attack_visual.visible = true
+	attack_flash_time = 0.12
+
+	for area in attack_area.get_overlapping_areas():
+		if area.has_method("take_damage"):
+			area.take_damage(1)
 
 func _show_game_over() -> void:
 	game_over = true

@@ -90,3 +90,16 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: the prototype now has a basic run failure and restart flow without menus, art assets, or complex game state systems.
+
+## 2026-05-22 - Player Attack Placeholder
+
+Goal: add a minimal player attack that can defeat the enemy.
+
+Changed:
+
+- Added a simple placeholder attack area around the player.
+- Added Space and left mouse click as attack inputs.
+- Added enemy health and defeat behavior.
+- Updated manual Godot test steps.
+
+Result: the player can now defeat the enemy without art assets, advanced combat systems, or complex UI.

@@ -76,3 +76,20 @@ Current test:
 - Let the enemy contact the player until health reaches zero.
 - Confirm the Game Over label appears and player movement stops.
 - Press R and confirm the scene restarts.
+
+## Player Attack Placeholder
+
+Goal: add the smallest player attack that can defeat the enemy placeholder.
+
+Added:
+
+- A simple attack area around the player.
+- Space and left mouse click attack input.
+- Enemy health and defeat output when health reaches zero.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Move near the red enemy and press Space or left mouse click.
+- Confirm the enemy prints health changes and disappears after two hits.
+- Confirm movement, enemy chase, contact damage, Game Over, and R restart still work.

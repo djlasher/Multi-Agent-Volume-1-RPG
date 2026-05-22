@@ -35,4 +35,6 @@ func take_damage(amount: int) -> void:
 	if health == 0:
 		defeated = true
 		print("Enemy defeated")
+		if get_tree().current_scene.has_method("enemy_defeated"):
+			get_tree().current_scene.enemy_defeated()
 		queue_free()

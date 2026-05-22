@@ -93,3 +93,20 @@ Current test:
 - Move near the red enemy and press Space or left mouse click.
 - Confirm the enemy prints health changes and disappears after two hits.
 - Confirm movement, enemy chase, contact damage, Game Over, and R restart still work.
+
+## Enemy Respawn Placeholder
+
+Goal: add a minimal loop where defeating the enemy increments a count and respawns one new enemy.
+
+Added:
+
+- Scene-level enemy defeat tracking.
+- A simple defeated enemy count label.
+- Delayed respawn at a fixed spawn point.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Defeat the enemy with Space or left mouse click.
+- Confirm the defeated count updates.
+- Confirm a new enemy appears after a short delay and keeps chasing the player.

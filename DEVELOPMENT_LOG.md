@@ -103,3 +103,16 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: the player can now defeat the enemy without art assets, advanced combat systems, or complex UI.
+
+## 2026-05-22 - Enemy Respawn Placeholder
+
+Goal: add a minimal enemy respawn loop after the current enemy is defeated.
+
+Changed:
+
+- Added scene-level defeated enemy tracking.
+- Added a simple defeated count label.
+- Respawned one new enemy after a short delay at a fixed spawn point.
+- Updated manual Godot test steps.
+
+Result: the prototype now supports repeated single-enemy defeats without multiple enemy types, waves, menus, or complex spawn systems.

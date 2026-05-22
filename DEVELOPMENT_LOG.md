@@ -172,3 +172,17 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: the prototype now has basic difficulty growth without multiple enemies, new enemy types, art assets, fancy UI, or complex spawn systems.
+
+## 2026-05-22 - Multiple Enemy Placeholder
+
+Goal: allow more than one enemy on screen while preserving the simple respawn loop.
+
+Changed:
+
+- Added enemy group tracking.
+- Started wave 1 with 2 active enemies.
+- Increased target enemy count slightly by wave with a cap of 6.
+- Used simple fixed spawn offsets around the existing spawn point.
+- Updated manual Godot test steps.
+
+Result: the prototype now supports small groups of the same enemy without new enemy types, art assets, pathfinding, object pooling, or complex spawn management.

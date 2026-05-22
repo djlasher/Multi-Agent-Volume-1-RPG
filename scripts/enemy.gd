@@ -8,6 +8,7 @@ var health: int = max_health
 var defeated: bool = false
 
 func _ready() -> void:
+	add_to_group("enemies")
 	player = get_tree().current_scene.get_node_or_null("Player")
 	body_entered.connect(_on_body_entered)
 

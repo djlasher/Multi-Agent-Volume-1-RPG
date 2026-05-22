@@ -184,3 +184,21 @@ Current test:
 - Open `project.godot` from the Godot editor and press Play.
 - Defeat 3 enemies and confirm the wave label changes to wave 2.
 - Confirm newly spawned enemies are slightly faster and tougher.
+
+## Multiple Enemy Placeholder
+
+Goal: support a small number of simultaneous enemies while keeping the existing respawn loop simple.
+
+Added:
+
+- Enemy group tracking.
+- Two active enemies on wave 1.
+- Slight enemy count increase by wave, capped at 6.
+- Simple fixed spawn offsets around the existing spawn point.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Confirm two enemies are active on wave 1.
+- Defeat enemies and confirm replacements spawn after a short delay.
+- Reach later waves and confirm more enemies can be active without changing enemy type.

@@ -9,6 +9,8 @@ const XP_PICKUP_SCENE := preload("res://scenes/xp_pickup.tscn")
 @export var attack_damage_upgrade_amount: int = 1
 @export var max_health_upgrade_amount: int = 1
 @export var enemies_per_wave: int = 3
+@export var base_enemy_count: int = 2
+@export var max_enemy_count: int = 6
 
 var enemies_defeated: int = 0
 var xp: int = 0
@@ -33,6 +35,7 @@ func _ready() -> void:
 	_update_level()
 	_update_wave()
 	_configure_enemy(enemy)
+	_fill_enemy_count()
 	level_up_label.visible = false
 	upgrade_choice_label.visible = false
 
@@ -74,10 +77,33 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _respawn_enemy_after_delay() -> void:
 	await get_tree().create_timer(enemy_respawn_delay, false).timeout
+	_fill_enemy_count()
+
+func _fill_enemy_count() -> void:
+	var target_count := _target_enemy_count()
+	while get_tree().get_nodes_in_group("enemies").size() < target_count:
+		_spawn_enemy()
+
+func _spawn_enemy() -> void:
 	var new_enemy := ENEMY_SCENE.instantiate()
-	new_enemy.position = enemy_spawn_point.position
+	var spawn_index := get_tree().get_nodes_in_group("enemies").size()
+	new_enemy.position = _spawn_position_for_index(spawn_index)
 	_configure_enemy(new_enemy)
 	add_child(new_enemy)
+
+func _target_enemy_count() -> int:
+	return min(base_enemy_count + wave - 1, max_enemy_count)
+
+func _spawn_position_for_index(spawn_index: int) -> Vector2:
+	var offsets := [
+		Vector2.ZERO,
+		Vector2(-140, -90),
+		Vector2(140, -90),
+		Vector2(-160, 90),
+		Vector2(160, 90),
+		Vector2(0, -150),
+	]
+	return enemy_spawn_point.position + offsets[spawn_index % offsets.size()]
 
 func _spawn_xp_pickup(spawn_position: Vector2) -> void:
 	var pickup := XP_PICKUP_SCENE.instantiate()

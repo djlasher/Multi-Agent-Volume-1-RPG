@@ -110,3 +110,20 @@ Current test:
 - Defeat the enemy with Space or left mouse click.
 - Confirm the defeated count updates.
 - Confirm a new enemy appears after a short delay and keeps chasing the player.
+
+## XP Pickup Placeholder
+
+Goal: add the smallest XP collection loop after defeating an enemy.
+
+Added:
+
+- A simple blue XP pickup that spawns at the defeated enemy's position.
+- Player collection by touching the pickup.
+- A simple XP count label.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Defeat the enemy with Space or left mouse click.
+- Touch the blue XP pickup and confirm the XP count increases.
+- Confirm enemy respawn, chase, contact damage, Game Over, and R restart still work.

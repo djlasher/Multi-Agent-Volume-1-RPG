@@ -37,6 +37,13 @@ offset_right=220.0
 offset_bottom=42.0
 text="Enemies defeated: 0"
 
+[node name="XPCountLabel" type="Label" parent="GameUI"]
+offset_left=16.0
+offset_top=44.0
+offset_right=220.0
+offset_bottom=70.0
+text="XP: 0"
+
 [node name="GameOverLabel" type="Label" parent="GameUI"]
 visible=false
 offset_left=324.0

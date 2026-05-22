@@ -22,6 +22,8 @@ This project currently targets Godot `4.6.3`.
 - Press Space or left mouse click near the enemy to attack.
 - The enemy should be defeated after two successful hits.
 - The defeated count should update, and a new enemy should respawn after a short delay.
+- A small blue XP pickup should appear where the enemy was defeated.
+- Touch the XP pickup to increase the XP count.
 - Move the green player placeholder into the red enemy placeholder.
 - The player should briefly flash yellow.
 - The console should print the player's remaining health.

@@ -116,3 +116,16 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: the prototype now supports repeated single-enemy defeats without multiple enemy types, waves, menus, or complex spawn systems.
+
+## 2026-05-22 - XP Pickup Placeholder
+
+Goal: add a minimal XP pickup loop after defeating an enemy.
+
+Changed:
+
+- Spawned one blue XP pickup at the defeated enemy's position.
+- Added player pickup collection by contact.
+- Added a simple XP count label.
+- Updated manual Godot test steps.
+
+Result: the prototype now tracks basic XP from enemy defeats without level-up choices, multiple pickup types, art assets, or complex progression systems.

@@ -15,3 +15,17 @@ Next:
 
 - Open the project in Godot and verify the player moves in the test arena.
 - Add enemy placeholder behavior after the movement loop is confirmed.
+
+## Local Playability Instructions
+
+Goal: make the first movement prototype easy to open and test locally.
+
+Added:
+
+- Manual Godot editor instructions in `docs/RUNNING_LOCALLY.md`.
+- A note that command-line Godot checks require the full path to `godot.exe` if Godot is not on `PATH`.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Use the arrow keys to move the player placeholder around the test arena.

@@ -65,3 +65,15 @@ Changed:
 - Updated local run docs to state that the project currently targets Godot `4.6.3`.
 
 Result: project metadata now matches the Godot editor version used for local validation.
+
+## 2026-05-22 - Enemy Follow Placeholder
+
+Goal: make the enemy slowly move toward the player while keeping the existing contact feedback.
+
+Changed:
+
+- Added direct, slow movement from the enemy placeholder toward the `Player` node.
+- Preserved the existing collision-triggered player health feedback.
+- Updated manual Godot test steps.
+
+Result: the enemy now approaches the player without pathfinding, advanced AI, art assets, or expanded combat systems.

@@ -44,3 +44,18 @@ Current test:
 - Open `project.godot` from the Godot editor and press Play.
 - Move the green player placeholder into the red enemy placeholder.
 - Confirm the player flashes yellow and health is printed in the Godot output.
+
+## Enemy Follow Placeholder
+
+Goal: make the existing enemy placeholder slowly move toward the player without adding advanced AI.
+
+Added:
+
+- Simple enemy movement that finds the `Player` node in the current scene.
+- Slow direct movement toward the player's position.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Confirm the red enemy placeholder slowly moves toward the green player placeholder.
+- Confirm touching the enemy still flashes the player yellow and prints health.

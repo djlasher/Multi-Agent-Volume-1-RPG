@@ -18,6 +18,7 @@ This project currently targets Godot `4.6.3`.
 
 ## Current Gameplay Test
 
+- The red enemy placeholder should slowly move toward the green player placeholder.
 - Move the green player placeholder into the red enemy placeholder.
 - The player should briefly flash yellow.
 - The console should print the player's remaining health.

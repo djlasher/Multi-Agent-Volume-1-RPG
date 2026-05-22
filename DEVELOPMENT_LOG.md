@@ -53,3 +53,15 @@ Changed:
 - Documented the manual Godot editor test steps.
 
 Result: the prototype now has a minimal contact interaction without enemy AI, combat systems, art assets, or additional gameplay loops.
+
+## 2026-05-22 - Godot 4.6.3 Metadata
+
+Goal: capture the project metadata changes made after opening the project in Godot 4.6.3.
+
+Changed:
+
+- Updated `project.godot` metadata from Godot feature target `4.3` to `4.6`.
+- Kept `.godot/` cache files ignored and left `.vscode/` untracked.
+- Updated local run docs to state that the project currently targets Godot `4.6.3`.
+
+Result: project metadata now matches the Godot editor version used for local validation.

@@ -2,6 +2,8 @@
 
 Godot is installed locally but may not be available as a `godot` command in the terminal.
 
+This project currently targets Godot `4.6.3`.
+
 ## Open From The Godot Editor
 
 1. Open the Godot editor.
@@ -27,4 +29,4 @@ Do not assume `godot` is available on `PATH`.
 For command-line Godot checks, either:
 
 - skip Godot execution, or
-- use the full local path to `godot.exe`.
+- use the full local path to `godot_console.exe`.

@@ -14,6 +14,12 @@ Godot is installed locally but may not be available as a `godot` command in the 
 
 - Arrow keys: move the player placeholder.
 
+## Current Gameplay Test
+
+- Move the green player placeholder into the red enemy placeholder.
+- The player should briefly flash yellow.
+- The console should print the player's remaining health.
+
 ## Command-Line Checks
 
 Do not assume `godot` is available on `PATH`.

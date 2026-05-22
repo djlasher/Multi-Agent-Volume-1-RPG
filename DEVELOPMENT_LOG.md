@@ -41,3 +41,15 @@ Validation commands used:
 Result: project validated successfully and the main scene launched headlessly without errors.
 
 Note: this Codex shell did not pick up `godot` or `godot_console` from `PATH`, so the direct executable path was used.
+
+## 2026-05-22 - Enemy Collision Placeholder
+
+Goal: add one simple enemy placeholder and basic player/enemy collision feedback.
+
+Changed:
+
+- Added a stationary red enemy placeholder in the test arena.
+- Added basic player health state and a short color flash when the player touches the enemy.
+- Documented the manual Godot editor test steps.
+
+Result: the prototype now has a minimal contact interaction without enemy AI, combat systems, art assets, or additional gameplay loops.

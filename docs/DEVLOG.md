@@ -29,3 +29,18 @@ Current test:
 
 - Open `project.godot` from the Godot editor and press Play.
 - Use the arrow keys to move the player placeholder around the test arena.
+
+## Enemy Collision Placeholder
+
+Goal: add the smallest enemy interaction to prove player/enemy contact can be detected.
+
+Added:
+
+- A stationary enemy placeholder scene using only a colored rectangle and collision shape.
+- Player hit feedback that briefly changes the player color and prints remaining health.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Move the green player placeholder into the red enemy placeholder.
+- Confirm the player flashes yellow and health is printed in the Godot output.

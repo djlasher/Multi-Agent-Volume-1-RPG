@@ -22,3 +22,16 @@ zoom=Vector2(1.5, 1.5)
 
 [node name="Enemy" parent="." instance=ExtResource("2_enemy")]
 position=Vector2(620, 270)
+
+[node name="GameUI" type="CanvasLayer" parent="."]
+
+[node name="GameOverLabel" type="Label" parent="GameUI"]
+visible=false
+offset_left=324.0
+offset_top=222.0
+offset_right=636.0
+offset_bottom=318.0
+text="Game Over
+Press R to Restart"
+horizontal_alignment=1
+vertical_alignment=1

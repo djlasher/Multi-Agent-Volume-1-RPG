@@ -22,6 +22,8 @@ This project currently targets Godot `4.6.3`.
 - Move the green player placeholder into the red enemy placeholder.
 - The player should briefly flash yellow.
 - The console should print the player's remaining health.
+- When health reaches zero, a Game Over label should appear and movement should stop.
+- Press R after Game Over to restart the scene.
 
 ## Command-Line Checks
 

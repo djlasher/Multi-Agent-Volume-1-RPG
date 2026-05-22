@@ -59,3 +59,20 @@ Current test:
 - Open `project.godot` from the Godot editor and press Play.
 - Confirm the red enemy placeholder slowly moves toward the green player placeholder.
 - Confirm touching the enemy still flashes the player yellow and prints health.
+
+## Game Over Restart Loop
+
+Goal: add the smallest lose/restart loop after player health reaches zero.
+
+Added:
+
+- A simple Game Over label in the main scene.
+- Player movement lockout after health reaches zero.
+- Restart input using R to reload the current scene.
+
+Current test:
+
+- Open `project.godot` from the Godot editor and press Play.
+- Let the enemy contact the player until health reaches zero.
+- Confirm the Game Over label appears and player movement stops.
+- Press R and confirm the scene restarts.

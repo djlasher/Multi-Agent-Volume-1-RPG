@@ -77,3 +77,16 @@ Changed:
 - Updated manual Godot test steps.
 
 Result: the enemy now approaches the player without pathfinding, advanced AI, art assets, or expanded combat systems.
+
+## 2026-05-22 - Game Over Restart Loop
+
+Goal: add a minimal lose/restart loop once player health reaches zero.
+
+Changed:
+
+- Added a simple Game Over label to the main scene.
+- Disabled player movement after health reaches zero.
+- Added R-to-restart behavior that reloads the current scene.
+- Updated manual Godot test steps.
+
+Result: the prototype now has a basic run failure and restart flow without menus, art assets, or complex game state systems.

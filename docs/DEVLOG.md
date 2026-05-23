@@ -362,3 +362,20 @@ Current test:
 - Press Space or left mouse click and confirm the original basic attack still works.
 - Press E and confirm nearby enemies take burst damage and the purple feedback appears.
 - Confirm E cannot be spammed because of its longer cooldown.
+
+## Version 0.7 Health Pickup And Recovery
+
+Goal: add a small survival recovery mechanic without adding meta progression or inventory.
+
+Added:
+
+- Chance-based green health pickup drops from defeated enemies.
+- Health pickups restore 1 player health, capped at max health.
+- Health pickup collection uses the same pickup-radius behavior as XP pickups.
+- Console feedback shows healing results during manual testing.
+
+Current test:
+
+- Take damage from an enemy, then defeat enemies until a green health pickup drops.
+- Touch or move near the green pickup and confirm health restores by 1 without exceeding max health.
+- Confirm blue XP pickups, score, upgrades, Game Over, restart, waves, and enemy spawning still work.

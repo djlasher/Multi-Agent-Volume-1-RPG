@@ -71,6 +71,14 @@ func take_hit() -> void:
 	if health == 0:
 		_show_game_over()
 
+func heal(amount: int) -> void:
+	if game_over:
+		return
+
+	var previous_health := health
+	health = min(health + amount, max_health)
+	print("Player healed: %s -> %s/%s" % [previous_health, health, max_health])
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
 		_attack()

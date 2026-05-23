@@ -6,10 +6,12 @@ const REQUIRED_RESOURCES := [
 	"res://scenes/enemy.tscn",
 	"res://scenes/rusher_enemy.tscn",
 	"res://scenes/xp_pickup.tscn",
+	"res://scenes/health_pickup.tscn",
 	"res://scripts/main.gd",
 	"res://scripts/player.gd",
 	"res://scripts/enemy.gd",
 	"res://scripts/xp_pickup.gd",
+	"res://scripts/health_pickup.gd",
 ]
 
 const REQUIRED_NODES := [
@@ -113,3 +115,15 @@ func _check_main_scene(main_scene: Node, failures: Array[String]) -> void:
 			failures.append("XP pickup is missing its script")
 		if xp_pickup != null:
 			xp_pickup.free()
+
+	var health_pickup_scene := load("res://scenes/health_pickup.tscn")
+	if health_pickup_scene == null:
+		failures.append("Could not load health pickup scene")
+	else:
+		var health_pickup: Node = health_pickup_scene.instantiate()
+		if health_pickup == null:
+			failures.append("Could not instantiate health pickup scene")
+		elif health_pickup.get_script() == null:
+			failures.append("Health pickup is missing its script")
+		if health_pickup != null:
+			health_pickup.free()

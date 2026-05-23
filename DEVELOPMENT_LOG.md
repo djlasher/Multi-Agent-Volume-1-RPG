@@ -307,3 +307,16 @@ Changed:
 - Updated the smoke test to check the new player attack nodes.
 
 Result: combat now has a basic close-range decision without adding weapons, inventory, enemies, bosses, meta progression, or broader combat systems.
+
+## 2026-05-22 - Version 0.7 Health Pickup And Recovery
+
+Goal: add a small recovery mechanic so runs can last longer without adding shops, inventory, meta progression, or larger systems.
+
+Changed:
+
+- Added a green health pickup scene and script.
+- Added `health_pickup_drop_chance` tuning on the main scene.
+- Health pickups restore 1 health, clamp at player max health, and use the existing pickup radius behavior.
+- Added console healing feedback and smoke test coverage for the new pickup.
+
+Result: players can recover during a run while the existing XP, score, upgrade, enemy, wave, and game-over loops remain intact.

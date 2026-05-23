@@ -3,6 +3,7 @@ extends Node2D
 const ENEMY_SCENE := preload("res://scenes/enemy.tscn")
 const RUSHER_ENEMY_SCENE := preload("res://scenes/rusher_enemy.tscn")
 const XP_PICKUP_SCENE := preload("res://scenes/xp_pickup.tscn")
+const HEALTH_PICKUP_SCENE := preload("res://scenes/health_pickup.tscn")
 
 enum GameState { START, PLAYING, GAME_OVER }
 
@@ -23,6 +24,7 @@ enum GameState { START, PLAYING, GAME_OVER }
 @export var late_rusher_cap: int = 2
 @export var late_rusher_cap_time: float = 60.0
 @export var starting_player_health: int = 5
+@export var health_pickup_drop_chance: float = 0.25
 @export var debug_enable_rusher_time_skip: bool = false
 
 var enemies_defeated: int = 0
@@ -95,6 +97,7 @@ func enemy_defeated(defeat_position: Vector2) -> void:
 	_update_score()
 	print("Enemies defeated: %s" % enemies_defeated)
 	_spawn_xp_pickup(defeat_position)
+	_try_spawn_health_pickup(defeat_position)
 	_respawn_enemy_after_delay()
 
 func collect_xp(amount: int) -> void:
@@ -187,6 +190,15 @@ func _spawn_xp_pickup(spawn_position: Vector2) -> void:
 	var pickup := XP_PICKUP_SCENE.instantiate()
 	pickup.position = spawn_position
 	add_child(pickup)
+
+func _try_spawn_health_pickup(spawn_position: Vector2) -> void:
+	if randf() > health_pickup_drop_chance:
+		return
+
+	var pickup := HEALTH_PICKUP_SCENE.instantiate()
+	pickup.position = spawn_position + Vector2(18, 0)
+	add_child(pickup)
+	print("Health pickup dropped")
 
 func _apply_starting_player_health() -> void:
 	player.max_health = starting_player_health

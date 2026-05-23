@@ -346,3 +346,17 @@ Changed:
 - Ordered milestone checks before normal timed upgrades to avoid duplicate prompts on overlap.
 
 Result: surviving to 60 seconds now produces a clear reward moment without adding bosses, shops, inventory, meta progression, or new combat systems.
+
+## 2026-05-22 - Version 1.0 Presentable Prototype UI Pass
+
+Goal: improve clarity for presenting and manually testing the current prototype without expanding gameplay scope.
+
+Changed:
+
+- Rewrote `docs/next-implementation-plan.md` as reusable Codex project instructions.
+- Clarified the start screen controls and objective text.
+- Added an in-run status/objective label.
+- Added selected upgrades to the game-over run summary.
+- Improved upgrade prompt spacing and updated smoke test coverage for the new UI node.
+
+Result: the prototype is easier to understand at start, during upgrade pauses, and after Game Over while preserving the existing systems.

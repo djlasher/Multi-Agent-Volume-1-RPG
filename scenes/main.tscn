@@ -84,24 +84,33 @@ offset_right=360.0
 offset_bottom=210.0
 text="Upgrades: 0 | Latest: None"
 
+[node name="StatusLabel" type="Label" parent="GameUI"]
+offset_left=16.0
+offset_top=212.0
+offset_right=430.0
+offset_bottom=254.0
+text="Objective: Press Enter or Space to start"
+
 [node name="StartLabel" type="Label" parent="GameUI"]
-offset_left=210.0
-offset_top=126.0
-offset_right=750.0
-offset_bottom=294.0
+offset_left=170.0
+offset_top=92.0
+offset_right=790.0
+offset_bottom=326.0
 text="Mini Roguelite Prototype
 Enter/Space: Start Run
 Arrow Keys: Move
 Space or Left Click: Attack
+E: Secondary Burst
+Collect XP, choose upgrades, survive to 60 seconds
 Choose upgrade cards with 1, 2, or 3"
 horizontal_alignment=1
 vertical_alignment=1
 
 [node name="LevelUpLabel" type="Label" parent="GameUI"]
 visible=false
-offset_left=324.0
-offset_top=104.0
-offset_right=636.0
+offset_left=270.0
+offset_top=86.0
+offset_right=690.0
 offset_bottom=166.0
 text="Level Up!
 Game Paused"
@@ -110,10 +119,10 @@ vertical_alignment=1
 
 [node name="UpgradeChoiceLabel" type="Label" parent="GameUI"]
 visible=false
-offset_left=180.0
+offset_left=150.0
 offset_top=168.0
-offset_right=780.0
-offset_bottom=332.0
+offset_right=810.0
+offset_bottom=360.0
 text="GAME PAUSED - Choose an upgrade card
 1 - Move Speed Up
     +25 move speed

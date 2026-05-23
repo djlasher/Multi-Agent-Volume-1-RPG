@@ -23,6 +23,8 @@ This project currently targets Godot `4.6.3`.
 ## Current Gameplay Test
 
 - Press Enter or Space on the start screen to begin the run.
+- Confirm the start screen clearly lists movement, basic attack, secondary attack, survival objective, and upgrade keys.
+- During play, confirm the objective/status label explains the current goal or paused upgrade state.
 - The red enemy placeholder should slowly move toward the green player placeholder.
 - Press Space or left mouse click near the enemy to attack; attacks have a short cooldown.
 - Press E near enemies to use the secondary radial burst; it has a longer cooldown and shows a purple placeholder flash.
@@ -52,6 +54,7 @@ This project currently targets Godot `4.6.3`.
 - The console should print the player's remaining health.
 - When health reaches zero, a Game Over label should appear and movement should stop.
 - The run summary should show run time, final score, enemies defeated, level reached, and wave reached.
+- The run summary should include the upgrades selected during the run.
 - Press R after Game Over to restart the scene.
 
 ## Command-Line Checks

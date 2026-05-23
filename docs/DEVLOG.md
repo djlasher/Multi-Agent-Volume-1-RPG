@@ -415,3 +415,22 @@ Current test:
 - Confirm the milestone message appears, score increases, and one upgrade choice opens.
 - Pick an upgrade and confirm gameplay resumes.
 - Confirm normal timed upgrades, XP upgrades, score, enemies, pickups, Game Over, and restart still work.
+
+## Version 1.0 Presentable Prototype UI Pass
+
+Goal: make the current prototype easier to understand and present without adding gameplay systems.
+
+Added:
+
+- Clearer start screen instructions for movement, attacks, survival, and upgrades.
+- A simple objective/status label during play and upgrade pauses.
+- Game-over summary text that includes selected upgrades.
+- Slightly more readable upgrade choice spacing.
+- Reusable Codex project instructions in `docs/next-implementation-plan.md`.
+
+Current test:
+
+- Start the project and confirm the start screen explains the controls and objective.
+- Start a run and confirm the status label updates during play.
+- Trigger an upgrade and confirm the status label and upgrade prompt are readable.
+- End a run and confirm the summary includes selected upgrades.

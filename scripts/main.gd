@@ -55,6 +55,7 @@ var milestone_awarded: bool = false
 @onready var wave_label: Label = $GameUI/WaveLabel
 @onready var time_label: Label = $GameUI/TimeLabel
 @onready var upgrade_count_label: Label = $GameUI/UpgradeCountLabel
+@onready var status_label: Label = $GameUI/StatusLabel
 @onready var start_label: Label = $GameUI/StartLabel
 @onready var level_up_label: Label = $GameUI/LevelUpLabel
 @onready var upgrade_choice_label: Label = $GameUI/UpgradeChoiceLabel
@@ -75,6 +76,7 @@ func _ready() -> void:
 	_update_wave()
 	_update_time()
 	_update_upgrade_count()
+	_update_status("Objective: Press Enter or Space to start")
 	_configure_enemy(enemy)
 	_fill_enemy_count()
 	get_tree().paused = true
@@ -239,7 +241,9 @@ func player_game_over() -> void:
 		level,
 		wave,
 	]
+	run_summary_label.text += "\nUpgrades: %s" % _upgrade_summary()
 	run_summary_label.visible = true
+	_update_status("Run ended. Press R to restart.")
 
 func _update_defeated_count() -> void:
 	defeated_count_label.text = "Defeated: %s" % enemies_defeated
@@ -265,6 +269,14 @@ func _update_upgrade_count() -> void:
 		latest = selected_upgrades[selected_upgrades.size() - 1]
 	upgrade_count_label.text = "Upgrades: %s | Latest: %s" % [selected_upgrades.size(), latest]
 
+func _update_status(message: String) -> void:
+	status_label.text = message
+
+func _upgrade_summary() -> String:
+	if selected_upgrades.is_empty():
+		return "None selected"
+	return ", ".join(selected_upgrades)
+
 func _format_time(time_seconds: float) -> String:
 	var total_seconds := int(time_seconds)
 	var minutes := int(total_seconds / 60)
@@ -288,6 +300,7 @@ func _award_survival_milestone() -> void:
 	milestone_awarded = true
 	score += milestone_score_bonus
 	_update_score()
+	_update_status("Milestone reached: %s seconds survived. Choose a reward." % int(milestone_time))
 	print("Milestone reached: %s seconds survived! +%s score" % [int(milestone_time), milestone_score_bonus])
 	_start_upgrade_choice("Milestone reached: %s seconds survived!\n+%s bonus score\nGame Paused" % [int(milestone_time), milestone_score_bonus])
 
@@ -309,6 +322,7 @@ func _start_upgrade_choice(prompt_text: String = "") -> void:
 	else:
 		level_up_label.text = prompt_text
 	upgrade_choice_label.text = _format_upgrade_choices()
+	_update_status("Game paused. Choose upgrade 1, 2, or 3.")
 	_update_level()
 	_update_xp_count()
 	print("Level up! Gameplay paused. Choose one of the dealt upgrades with 1, 2, or 3.")
@@ -368,9 +382,10 @@ func _upgrade_pool() -> Array[Dictionary]:
 	]
 
 func _format_upgrade_choices() -> String:
-	var lines: Array[String] = ["GAME PAUSED - Choose an upgrade card"]
+	var lines: Array[String] = ["GAME PAUSED - Choose 1 upgrade card"]
 	for index in range(current_upgrade_choices.size()):
 		var choice := current_upgrade_choices[index]
+		lines.append("")
 		lines.append("%s - %s" % [index + 1, choice["name"]])
 		lines.append("    %s" % choice["description"])
 	return "\n".join(lines)
@@ -412,10 +427,12 @@ func _apply_upgrade(choice: Dictionary) -> void:
 	level_up_label.text = "Level %s Upgrade: %s\nRun Resumed" % [level, choice["name"]]
 	level_up_label.visible = true
 	_update_upgrade_count()
+	_update_status("Objective: survive, collect XP, and reach the next reward.")
 	print("Upgrade selected: %s" % choice["name"])
 
 func _start_run() -> void:
 	game_state = GameState.PLAYING
 	get_tree().paused = false
 	start_label.visible = false
+	_update_status("Objective: survive 60 seconds, collect XP, and choose upgrades.")
 	print("Run started")

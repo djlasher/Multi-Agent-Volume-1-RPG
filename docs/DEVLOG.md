@@ -310,3 +310,20 @@ Current test:
 - Defeat enemies until an orange rusher appears.
 - Confirm rushers move faster, take fewer hits than similarly scaled basic enemies, and still grant score/XP on defeat.
 - Confirm Game Over, restart, upgrades, wave scaling, and basic enemy spawns still work.
+
+## Version 0.4 Balance And Debug Testability
+
+Goal: make early manual testing easier without changing the core gameplay loop.
+
+Added:
+
+- Exported tuning for starting player health and existing enemy/spawn values.
+- Gentler default opening values: 5 player health, 1 starting enemy, slower respawn, smaller enemy cap, and earlier rusher unlock.
+- Opt-in debug time skip for rusher testing with F6 when `debug_enable_rusher_time_skip` is enabled on the `Main` node.
+
+Current test:
+
+- Start a normal run and confirm the opening is less crowded but still dangerous.
+- Survive to about 32 seconds and confirm rushers can begin appearing.
+- In the editor, enable `debug_enable_rusher_time_skip` on `Main`, start a run, press F6, and confirm the timer jumps near rusher unlock.
+- Confirm F6 does nothing in normal play when the debug flag is disabled.

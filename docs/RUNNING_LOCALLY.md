@@ -34,6 +34,7 @@ This project currently targets Godot `4.6.3`.
 - The score should increase when enemies are defeated.
 - Enemies should scale over time, with faster enemies after 30 seconds and tougher enemies after 60 seconds.
 - After about 35 seconds, orange rusher enemies can begin spawning; they should move faster and have lower health than the basic red enemies.
+- Current Version 0.4 tuning starts with 1 enemy, 5 player health, a slightly slower respawn, and rushers unlocked at about 32 seconds.
 - A small blue XP pickup should appear where the enemy was defeated.
 - Touch the XP pickup to increase the XP count.
 - At 3 XP, or when the timed upgrade interval triggers, the player should level up and see 3 random upgrade cards.
@@ -62,3 +63,9 @@ Future milestones should run both checks:
 & "C:\Users\Clay\Desktop\godot\godot_console.exe" --headless --path "D:\Github Repos\Multi Agent Volume 1 RPG" res://scenes/main.tscn --quit-after 1
 & "C:\Users\Clay\Desktop\godot\godot_console.exe" --headless --path "D:\Github Repos\Multi Agent Volume 1 RPG" -s res://tests/smoke_test.gd
 ```
+
+## Manual Debug Option
+
+For rusher testing, select the `Main` node in the Godot editor and enable `debug_enable_rusher_time_skip`.
+
+When that debug flag is enabled during a run, press F6 to move the run timer near the rusher unlock time. The shortcut is disabled by default and should not affect normal play.

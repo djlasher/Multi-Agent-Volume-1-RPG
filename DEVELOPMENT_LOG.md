@@ -269,3 +269,16 @@ Changed:
 - Updated the smoke test to cover the new enemy scene.
 
 Result: runs now gain a small amount of enemy variety after the opening stretch without adding bosses, new weapons, meta progression, or a larger spawn system.
+
+## 2026-05-22 - Version 0.4 Balance And Debug Testability
+
+Goal: make the current prototype easier to manually test while preserving the existing challenge and systems.
+
+Changed:
+
+- Added exported starting player health tuning.
+- Tuned the early run to start with fewer enemies, slower respawns, a smaller enemy cap, and rushers around 32 seconds.
+- Added an opt-in F6 debug shortcut that skips the timer near rusher unlock only when `debug_enable_rusher_time_skip` is enabled.
+- Documented the debug/manual testing flow.
+
+Result: manual playtests can more reliably reach rusher enemies while normal runs keep the existing combat, XP, score, upgrade, wave, game-over, and restart loops.

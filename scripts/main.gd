@@ -6,7 +6,7 @@ const XP_PICKUP_SCENE := preload("res://scenes/xp_pickup.tscn")
 
 enum GameState { START, PLAYING, GAME_OVER }
 
-@export var enemy_respawn_delay: float = 1.25
+@export var enemy_respawn_delay: float = 1.5
 @export var xp_to_level: int = 3
 @export var timed_upgrade_interval: float = 25.0
 @export var speed_upgrade_amount: float = 25.0
@@ -15,10 +15,12 @@ enum GameState { START, PLAYING, GAME_OVER }
 @export var max_health_upgrade_amount: int = 1
 @export var pickup_radius_upgrade_amount: float = 18.0
 @export var enemies_per_wave: int = 3
-@export var base_enemy_count: int = 2
-@export var max_enemy_count: int = 6
-@export var rusher_enemy_unlock_time: float = 35.0
-@export var rusher_enemy_spawn_chance: float = 0.35
+@export var base_enemy_count: int = 1
+@export var max_enemy_count: int = 5
+@export var rusher_enemy_unlock_time: float = 32.0
+@export var rusher_enemy_spawn_chance: float = 0.45
+@export var starting_player_health: int = 5
+@export var debug_enable_rusher_time_skip: bool = false
 
 var enemies_defeated: int = 0
 var xp: int = 0
@@ -52,6 +54,7 @@ var selected_upgrades: Array[String] = []
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	randomize()
+	_apply_starting_player_health()
 	_update_defeated_count()
 	_update_score()
 	_update_xp_count()
@@ -113,6 +116,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_tree().reload_current_scene()
 		return
 
+	if game_state == GameState.PLAYING and not choosing_upgrade and event.keycode == KEY_F6:
+		_debug_skip_near_rusher_unlock()
+		return
+
 	if not choosing_upgrade:
 		return
 
@@ -162,6 +169,19 @@ func _spawn_xp_pickup(spawn_position: Vector2) -> void:
 	var pickup := XP_PICKUP_SCENE.instantiate()
 	pickup.position = spawn_position
 	add_child(pickup)
+
+func _apply_starting_player_health() -> void:
+	player.max_health = starting_player_health
+	player.health = starting_player_health
+
+func _debug_skip_near_rusher_unlock() -> void:
+	if not debug_enable_rusher_time_skip:
+		return
+
+	elapsed_time = max(elapsed_time, max(0.0, rusher_enemy_unlock_time - 1.0))
+	next_timed_upgrade_at = max(next_timed_upgrade_at, elapsed_time + 5.0)
+	_update_time()
+	print("Debug: skipped run timer near rusher unlock.")
 
 func player_game_over() -> void:
 	if run_over:

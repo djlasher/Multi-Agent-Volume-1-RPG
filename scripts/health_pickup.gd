@@ -30,4 +30,10 @@ func _collect() -> void:
 	collected = true
 	if player != null and player.has_method("heal"):
 		player.heal(heal_amount)
+	_play_audio("play_pickup")
 	queue_free()
+
+func _play_audio(method_name: String) -> void:
+	var audio_feedback := get_tree().current_scene.get_node_or_null("AudioFeedback")
+	if audio_feedback != null and audio_feedback.has_method(method_name):
+		audio_feedback.call(method_name)

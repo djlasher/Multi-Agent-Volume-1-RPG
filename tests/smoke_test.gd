@@ -8,6 +8,7 @@ const REQUIRED_RESOURCES := [
 	"res://scenes/xp_pickup.tscn",
 	"res://scenes/health_pickup.tscn",
 	"res://scripts/main.gd",
+	"res://scripts/audio_feedback.gd",
 	"res://scripts/player.gd",
 	"res://scripts/enemy.gd",
 	"res://scripts/xp_pickup.gd",
@@ -16,6 +17,7 @@ const REQUIRED_RESOURCES := [
 
 const REQUIRED_NODES := [
 	"Player",
+	"AudioFeedback",
 	"EnemySpawnPoint",
 	"GameUI",
 	"GameUI/DefeatedCountLabel",
@@ -80,6 +82,10 @@ func _check_main_scene(main_scene: Node, failures: Array[String]) -> void:
 		failures.append("Player is missing SecondaryAttackArea")
 	if player != null and player.get_node_or_null("SecondaryAttackArea/SecondaryAttackShape") == null:
 		failures.append("Player is missing SecondaryAttackShape")
+
+	var audio_feedback := main_scene.get_node_or_null("AudioFeedback")
+	if audio_feedback != null and audio_feedback.get_script() == null:
+		failures.append("AudioFeedback is missing its script")
 
 	var enemy_scene := load("res://scenes/enemy.tscn")
 	if enemy_scene == null:

@@ -27,9 +27,12 @@ This project currently targets Godot `4.6.3`.
 - During play, confirm the objective/status label explains the current goal or paused upgrade state.
 - The red enemy placeholder should slowly move toward the green player placeholder.
 - Press Space or left mouse click near the enemy to attack; attacks have a short cooldown.
+- Confirm the basic attack plays a short placeholder sound.
 - Press E near enemies to use the secondary radial burst; it has a longer cooldown and shows a purple placeholder flash.
+- Confirm the secondary burst plays a distinct placeholder sound.
 - The enemy should briefly change color/scale and be nudged back when hit.
 - The enemy should be defeated after two successful hits.
+- Confirm enemy defeat plays a placeholder sound.
 - The defeated count should update, and a new enemy should respawn after a short delay.
 - The wave should increase after every 3 defeated enemies.
 - Later waves should make newly spawned enemies slightly faster and tougher.
@@ -45,12 +48,14 @@ This project currently targets Godot `4.6.3`.
 - A small green health pickup can sometimes drop from defeated enemies.
 - Touch the XP pickup to increase the XP count.
 - Touch the health pickup to restore 1 health, capped at max health; the console should print the healing result.
+- Confirm XP and health pickup collection play a placeholder pickup sound.
 - At 3 XP, or when the timed upgrade interval triggers, the player should level up and see 3 random upgrade cards.
 - The upgrade prompt should clearly say gameplay is paused until an upgrade is chosen.
 - Press 1, 2, or 3 and confirm the chosen upgrade count/latest-upgrade label updates.
 - Confirm the dealt upgrades apply real effects when selected: movement speed, attack cooldown, damage, max health, pickup radius, secondary burst damage/cooldown/radius, or health pickup drop chance.
 - Move the green player placeholder into the red enemy placeholder.
 - The player should briefly flash yellow.
+- Confirm player damage plays a placeholder damage sound.
 - The console should print the player's remaining health.
 - When health reaches zero, a Game Over label should appear and movement should stop.
 - The run summary should show run time, final score, enemies defeated, level reached, and wave reached.
@@ -78,3 +83,7 @@ Future milestones should run both checks:
 For rusher testing, select the `Main` node in the Godot editor and enable `debug_enable_rusher_time_skip`.
 
 When that debug flag is enabled during a run, press F6 to move the run timer near the rusher unlock time. The shortcut is disabled by default and should not affect normal play.
+
+## Audio Test Notes
+
+The `AudioFeedback` node on the main scene has `audio_enabled` and `master_volume_db` exports. Keep audio enabled, then manually test basic attack, secondary burst, enemy defeat, pickup collection, and player damage to hear the generated placeholder sounds.

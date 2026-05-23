@@ -56,6 +56,7 @@ func take_damage(amount: int) -> void:
 	if health == 0:
 		defeated = true
 		print("Enemy defeated")
+		_play_audio("play_enemy_defeat")
 		if get_tree().current_scene.has_method("enemy_defeated"):
 			get_tree().current_scene.enemy_defeated(global_position)
 		queue_free()
@@ -90,3 +91,8 @@ func _apply_variant_visuals() -> void:
 	if body != null:
 		body.color = base_color
 	scale = base_scale
+
+func _play_audio(method_name: String) -> void:
+	var audio_feedback := get_tree().current_scene.get_node_or_null("AudioFeedback")
+	if audio_feedback != null and audio_feedback.has_method(method_name):
+		audio_feedback.call(method_name)

@@ -24,6 +24,7 @@ var game_over: bool = false
 @onready var secondary_attack_shape: CollisionShape2D = $SecondaryAttackArea/SecondaryAttackShape
 @onready var secondary_attack_visual: ColorRect = $SecondaryAttackArea/SecondaryAttackVisual
 @onready var game_over_label: Label = get_tree().current_scene.get_node_or_null("GameUI/GameOverLabel") as Label
+@onready var audio_feedback: Node = get_tree().current_scene.get_node_or_null("AudioFeedback")
 
 func _ready() -> void:
 	_update_secondary_attack_shape()
@@ -69,6 +70,7 @@ func take_hit() -> void:
 	health = max(health - 1, 0)
 	body.color = Color(1.0, 0.86, 0.16, 1)
 	hit_flash_time = 0.25
+	_play_audio("play_player_damage")
 	print("Player health: %s/%s" % [health, max_health])
 
 	if health == 0:
@@ -97,6 +99,7 @@ func _attack() -> void:
 	attack_cooldown_remaining = attack_cooldown
 	attack_visual.visible = true
 	attack_flash_time = 0.12
+	_play_audio("play_player_attack")
 	print("Player attack")
 
 	for area in attack_area.get_overlapping_areas():
@@ -110,6 +113,7 @@ func _secondary_attack() -> void:
 	secondary_attack_cooldown_remaining = secondary_attack_cooldown
 	secondary_attack_visual.visible = true
 	secondary_attack_flash_time = 0.18
+	_play_audio("play_secondary_burst")
 	print("Player secondary burst")
 
 	for area in secondary_attack_area.get_overlapping_areas():
@@ -125,6 +129,10 @@ func _update_secondary_attack_shape() -> void:
 	secondary_attack_visual.offset_top = -secondary_attack_radius
 	secondary_attack_visual.offset_right = secondary_attack_radius
 	secondary_attack_visual.offset_bottom = secondary_attack_radius
+
+func _play_audio(method_name: String) -> void:
+	if audio_feedback != null and audio_feedback.has_method(method_name):
+		audio_feedback.call(method_name)
 
 func _show_game_over() -> void:
 	game_over = true

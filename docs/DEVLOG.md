@@ -434,3 +434,19 @@ Current test:
 - Start a run and confirm the status label updates during play.
 - Trigger an upgrade and confirm the status label and upgrade prompt are readable.
 - End a run and confirm the summary includes selected upgrades.
+
+## Version 1.1 Lightweight Audio Feedback
+
+Goal: add simple placeholder audio cues without adding new gameplay systems.
+
+Added:
+
+- Runtime-generated placeholder sounds through an `AudioFeedback` node.
+- Audio cues for player basic attack, secondary burst, enemy defeat, pickup collection, and player damage.
+- Exported audio enable and volume controls on the `AudioFeedback` node.
+
+Current test:
+
+- Start a run and confirm basic attack, secondary burst, enemy defeat, XP/health pickup collection, and player damage each play a short placeholder sound.
+- Toggle `audio_enabled` off on `AudioFeedback` and confirm sounds stop.
+- Adjust `master_volume_db` on `AudioFeedback` and confirm volume changes.

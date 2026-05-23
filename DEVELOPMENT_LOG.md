@@ -360,3 +360,16 @@ Changed:
 - Improved upgrade prompt spacing and updated smoke test coverage for the new UI node.
 
 Result: the prototype is easier to understand at start, during upgrade pauses, and after Game Over while preserving the existing systems.
+
+## 2026-05-22 - Version 1.1 Lightweight Audio Feedback
+
+Goal: add simple placeholder sound feedback for existing actions without creating new gameplay systems or adding audio assets.
+
+Changed:
+
+- Added an `AudioFeedback` node that generates short placeholder tones at runtime.
+- Added audio cues for basic attack, secondary burst, enemy defeat, pickup collection, and player damage.
+- Added exported audio enable and volume controls.
+- Updated smoke test coverage and audio manual test docs.
+
+Result: core actions now have lightweight sound feedback while preserving the current gameplay systems.

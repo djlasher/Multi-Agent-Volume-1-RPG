@@ -34,6 +34,7 @@ This project currently targets Godot `4.6.3`.
 - Wave 1 should keep 2 enemies active, and later waves should add more enemies up to a small cap.
 - The run timer should count up during active gameplay and stop on Game Over.
 - The score should increase when enemies are defeated.
+- Survive to 60 seconds and confirm the milestone message appears, bonus score is awarded, and one upgrade choice opens.
 - Enemies should scale over time, with faster enemies after 30 seconds and tougher enemies after 60 seconds.
 - After about 35 seconds, orange rusher enemies can begin spawning; they should move faster and have lower health than the basic red enemies.
 - Current Version 0.4 tuning starts with 1 enemy, 5 player health, a slightly slower respawn, and rushers unlocked at about 32 seconds.

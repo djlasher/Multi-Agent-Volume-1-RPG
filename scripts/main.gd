@@ -30,6 +30,8 @@ enum GameState { START, PLAYING, GAME_OVER }
 @export var late_rusher_cap_time: float = 60.0
 @export var starting_player_health: int = 5
 @export var health_pickup_drop_chance: float = 0.25
+@export var milestone_time: float = 60.0
+@export var milestone_score_bonus: int = 500
 @export var debug_enable_rusher_time_skip: bool = false
 
 var enemies_defeated: int = 0
@@ -44,6 +46,7 @@ var game_state: GameState = GameState.START
 var next_timed_upgrade_at: float = timed_upgrade_interval
 var current_upgrade_choices: Array[Dictionary] = []
 var selected_upgrades: Array[String] = []
+var milestone_awarded: bool = false
 
 @onready var defeated_count_label: Label = $GameUI/DefeatedCountLabel
 @onready var score_label: Label = $GameUI/ScoreLabel
@@ -87,7 +90,9 @@ func _process(delta: float) -> void:
 
 	elapsed_time += delta
 	_update_time()
-	if elapsed_time >= next_timed_upgrade_at:
+	if not milestone_awarded and elapsed_time >= milestone_time:
+		_award_survival_milestone()
+	elif elapsed_time >= next_timed_upgrade_at:
 		_start_upgrade_choice()
 
 func enemy_defeated(defeat_position: Vector2) -> void:
@@ -279,7 +284,14 @@ func _time_scaling_tier() -> int:
 		return 1
 	return 0
 
-func _start_upgrade_choice() -> void:
+func _award_survival_milestone() -> void:
+	milestone_awarded = true
+	score += milestone_score_bonus
+	_update_score()
+	print("Milestone reached: %s seconds survived! +%s score" % [int(milestone_time), milestone_score_bonus])
+	_start_upgrade_choice("Milestone reached: %s seconds survived!\n+%s bonus score\nGame Paused" % [int(milestone_time), milestone_score_bonus])
+
+func _start_upgrade_choice(prompt_text: String = "") -> void:
 	if choosing_upgrade:
 		return
 
@@ -292,7 +304,10 @@ func _start_upgrade_choice() -> void:
 	get_tree().paused = true
 	upgrade_choice_label.visible = true
 	level_up_label.visible = true
-	level_up_label.text = "Level %s Reached\nGame Paused" % level
+	if prompt_text == "":
+		level_up_label.text = "Level %s Reached\nGame Paused" % level
+	else:
+		level_up_label.text = prompt_text
 	upgrade_choice_label.text = _format_upgrade_choices()
 	_update_level()
 	_update_xp_count()

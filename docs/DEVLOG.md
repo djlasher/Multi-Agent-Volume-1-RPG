@@ -397,3 +397,21 @@ Current test:
 - Confirm the new upgrade cards can appear alongside existing upgrades.
 - Select each new upgrade when available and confirm it changes secondary burst damage, cooldown, radius, or health pickup drop chance.
 - Confirm existing upgrades, XP, health pickups, enemies, Game Over, restart, and score still work.
+
+## Version 0.9 Milestone Reward Event
+
+Goal: make longer survival feel more meaningful with one lightweight timed reward.
+
+Added:
+
+- A once-per-run 60-second survival milestone.
+- Bonus score when the milestone is reached.
+- An immediate upgrade choice using the existing upgrade-card flow.
+- Exported milestone time and score bonus tuning.
+
+Current test:
+
+- Start a run and survive to 60 seconds.
+- Confirm the milestone message appears, score increases, and one upgrade choice opens.
+- Pick an upgrade and confirm gameplay resumes.
+- Confirm normal timed upgrades, XP upgrades, score, enemies, pickups, Game Over, and restart still work.

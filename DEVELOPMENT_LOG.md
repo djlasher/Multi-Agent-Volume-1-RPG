@@ -333,3 +333,16 @@ Changed:
 - Included the generated UID sidecar for the health pickup script.
 
 Result: level-up choices now cover primary combat, secondary combat, pickup utility, and recovery without adding new weapons, enemies, shops, inventory, or meta progression.
+
+## 2026-05-22 - Version 0.9 Milestone Reward Event
+
+Goal: reward longer survival with one simple timed event while preserving existing upgrade, score, enemy, pickup, and game-over systems.
+
+Changed:
+
+- Added exported `milestone_time` and `milestone_score_bonus` tuning.
+- Added a once-per-run 60-second milestone reward.
+- Awarded bonus score and opened the existing upgrade choice flow when the milestone triggers.
+- Ordered milestone checks before normal timed upgrades to avoid duplicate prompts on overlap.
+
+Result: surviving to 60 seconds now produces a clear reward moment without adding bosses, shops, inventory, meta progression, or new combat systems.

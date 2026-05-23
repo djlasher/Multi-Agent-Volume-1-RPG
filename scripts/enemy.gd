@@ -57,8 +57,11 @@ func take_damage(amount: int) -> void:
 		queue_free()
 
 func configure_for_wave(wave: int) -> void:
-	speed = 45.0 + ((wave - 1) * 10.0)
-	max_health = 2 + (wave - 1)
+	configure_for_difficulty(wave, 0)
+
+func configure_for_difficulty(wave: int, time_tier: int) -> void:
+	speed = 45.0 + ((wave - 1) * 10.0) + (time_tier * 15.0)
+	max_health = 2 + (wave - 1) + time_tier
 	health = max_health
 
 func _show_hit_feedback() -> void:

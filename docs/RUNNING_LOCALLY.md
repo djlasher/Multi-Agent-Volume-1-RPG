@@ -18,6 +18,7 @@ This project currently targets Godot `4.6.3`.
 
 ## Current Gameplay Test
 
+- Press Enter or Space on the start screen to begin the run.
 - The red enemy placeholder should slowly move toward the green player placeholder.
 - Press Space or left mouse click near the enemy to attack; attacks have a short cooldown.
 - The enemy should briefly change color/scale and be nudged back when hit.
@@ -27,6 +28,8 @@ This project currently targets Godot `4.6.3`.
 - Later waves should make newly spawned enemies slightly faster and tougher.
 - Wave 1 should keep 2 enemies active, and later waves should add more enemies up to a small cap.
 - The run timer should count up during active gameplay and stop on Game Over.
+- The score should increase when enemies are defeated.
+- Enemies should scale over time, with faster enemies after 30 seconds and tougher enemies after 60 seconds.
 - A small blue XP pickup should appear where the enemy was defeated.
 - Touch the XP pickup to increase the XP count.
 - At 3 XP, the player should level up and choose an upgrade with 1, 2, or 3.

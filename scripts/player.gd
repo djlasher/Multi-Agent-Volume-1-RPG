@@ -52,11 +52,6 @@ func take_hit() -> void:
 		_show_game_over()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if game_over:
-		if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:
-			get_tree().reload_current_scene()
-		return
-
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
 		_attack()
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:

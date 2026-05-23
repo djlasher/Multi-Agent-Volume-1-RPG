@@ -227,3 +227,18 @@ Changed:
 - Updated smoke test expected nodes and manual Godot test steps.
 
 Result: the prototype now reports basic run context without menus, save data, leaderboards, art assets, or complex scoring.
+
+## 2026-05-22 - Version 0.1 Round Loop
+
+Goal: implement the minimal Version 0.1 round loop from `docs/next-implementation-plan.md`.
+
+Changed:
+
+- Added explicit start, play, and game-over states.
+- Added a start screen with Enter/Space to begin.
+- Added score display based on defeated enemies.
+- Added time-based enemy scaling tiers after 30 and 60 seconds.
+- Added timed upgrade prompts using the existing upgrade choice UI.
+- Updated smoke test expected nodes and manual test steps.
+
+Result: the prototype now has a repeatable mini roguelite round loop while preserving the existing movement, combat, enemy, XP, upgrade, wave, and restart behavior.

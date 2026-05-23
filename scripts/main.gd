@@ -3,8 +3,11 @@ extends Node2D
 const ENEMY_SCENE := preload("res://scenes/enemy.tscn")
 const XP_PICKUP_SCENE := preload("res://scenes/xp_pickup.tscn")
 
+enum GameState { START, PLAYING, GAME_OVER }
+
 @export var enemy_respawn_delay: float = 1.25
 @export var xp_to_level: int = 3
+@export var timed_upgrade_interval: float = 25.0
 @export var speed_upgrade_amount: float = 25.0
 @export var attack_damage_upgrade_amount: int = 1
 @export var max_health_upgrade_amount: int = 1
@@ -19,12 +22,17 @@ var wave: int = 1
 var choosing_upgrade: bool = false
 var elapsed_time: float = 0.0
 var run_over: bool = false
+var score: int = 0
+var game_state: GameState = GameState.START
+var next_timed_upgrade_at: float = timed_upgrade_interval
 
 @onready var defeated_count_label: Label = $GameUI/DefeatedCountLabel
+@onready var score_label: Label = $GameUI/ScoreLabel
 @onready var xp_count_label: Label = $GameUI/XPCountLabel
 @onready var level_label: Label = $GameUI/LevelLabel
 @onready var wave_label: Label = $GameUI/WaveLabel
 @onready var time_label: Label = $GameUI/TimeLabel
+@onready var start_label: Label = $GameUI/StartLabel
 @onready var level_up_label: Label = $GameUI/LevelUpLabel
 @onready var upgrade_choice_label: Label = $GameUI/UpgradeChoiceLabel
 @onready var run_summary_label: Label = $GameUI/RunSummaryLabel
@@ -35,31 +43,38 @@ var run_over: bool = false
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_update_defeated_count()
+	_update_score()
 	_update_xp_count()
 	_update_level()
 	_update_wave()
 	_update_time()
 	_configure_enemy(enemy)
 	_fill_enemy_count()
+	get_tree().paused = true
+	start_label.visible = true
 	level_up_label.visible = false
 	upgrade_choice_label.visible = false
 	run_summary_label.visible = false
 
 func _process(delta: float) -> void:
-	if run_over or choosing_upgrade:
+	if game_state != GameState.PLAYING or run_over or choosing_upgrade:
 		return
 
 	elapsed_time += delta
 	_update_time()
+	if elapsed_time >= next_timed_upgrade_at:
+		_start_upgrade_choice()
 
 func enemy_defeated(defeat_position: Vector2) -> void:
 	enemies_defeated += 1
+	score += 100
 	var next_wave := int(enemies_defeated / enemies_per_wave) + 1
 	if next_wave != wave:
 		wave = next_wave
 		_update_wave()
 		print("Wave: %s" % wave)
 	_update_defeated_count()
+	_update_score()
 	print("Enemies defeated: %s" % enemies_defeated)
 	_spawn_xp_pickup(defeat_position)
 	_respawn_enemy_after_delay()
@@ -72,10 +87,21 @@ func collect_xp(amount: int) -> void:
 	print("XP: %s" % xp)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not choosing_upgrade:
+	if not event is InputEventKey or not event.pressed or event.echo:
 		return
 
-	if not event is InputEventKey or not event.pressed or event.echo:
+	if game_state == GameState.START:
+		if event.keycode == KEY_ENTER or event.keycode == KEY_SPACE:
+			_start_run()
+		return
+
+	if game_state == GameState.GAME_OVER:
+		if event.keycode == KEY_R:
+			get_tree().paused = false
+			get_tree().reload_current_scene()
+		return
+
+	if not choosing_upgrade:
 		return
 
 	if event.keycode == KEY_1:
@@ -128,8 +154,11 @@ func player_game_over() -> void:
 		return
 
 	run_over = true
-	run_summary_label.text = "Run Summary\nTime: %s\nEnemies defeated: %s\nLevel reached: %s\nWave reached: %s" % [
+	game_state = GameState.GAME_OVER
+	get_tree().paused = true
+	run_summary_label.text = "Run Summary\nTime: %s\nScore: %s\nEnemies defeated: %s\nLevel reached: %s\nWave reached: %s" % [
 		_format_time(elapsed_time),
+		score,
 		enemies_defeated,
 		level,
 		wave,
@@ -138,6 +167,9 @@ func player_game_over() -> void:
 
 func _update_defeated_count() -> void:
 	defeated_count_label.text = "Enemies defeated: %s" % enemies_defeated
+
+func _update_score() -> void:
+	score_label.text = "Score: %s" % score
 
 func _update_xp_count() -> void:
 	xp_count_label.text = "XP: %s" % xp
@@ -158,8 +190,17 @@ func _format_time(time_seconds: float) -> String:
 	return "%02d:%02d" % [minutes, seconds]
 
 func _configure_enemy(enemy_node: Node) -> void:
-	if enemy_node.has_method("configure_for_wave"):
+	if enemy_node.has_method("configure_for_difficulty"):
+		enemy_node.configure_for_difficulty(wave, _time_scaling_tier())
+	elif enemy_node.has_method("configure_for_wave"):
 		enemy_node.configure_for_wave(wave)
+
+func _time_scaling_tier() -> int:
+	if elapsed_time >= 60.0:
+		return 2
+	if elapsed_time >= 30.0:
+		return 1
+	return 0
 
 func _start_upgrade_choice() -> void:
 	if choosing_upgrade:
@@ -168,6 +209,7 @@ func _start_upgrade_choice() -> void:
 	level += 1
 	xp = 0
 	choosing_upgrade = true
+	next_timed_upgrade_at = elapsed_time + timed_upgrade_interval
 	get_tree().paused = true
 	upgrade_choice_label.visible = true
 	level_up_label.visible = true
@@ -183,3 +225,9 @@ func _apply_upgrade(message: String, apply_upgrade: Callable) -> void:
 	level_up_label.text = "Level %s: %s" % [level, message]
 	level_up_label.visible = true
 	print("Upgrade selected: %s" % message)
+
+func _start_run() -> void:
+	game_state = GameState.PLAYING
+	get_tree().paused = false
+	start_label.visible = false
+	print("Run started")

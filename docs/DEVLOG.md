@@ -255,3 +255,22 @@ Current test:
 - Confirm the timer counts up during gameplay.
 - Trigger a level-up choice and confirm the timer pauses.
 - Reach Game Over and confirm the summary appears.
+
+## Version 0.1 Round Loop
+
+Goal: turn the prototype into a repeatable mini roguelite round loop without refactoring the project.
+
+Added:
+
+- Start/play/game-over state flow.
+- Start screen that waits for Enter or Space.
+- Score display based on enemies defeated.
+- Time-based enemy scaling tiers at 30 and 60 seconds.
+- Timed upgrade choice prompts using the existing upgrade UI.
+
+Current test:
+
+- Start the run from the start screen.
+- Confirm the timer and score update only during active play.
+- Survive long enough to see the timed upgrade choice.
+- Confirm Game Over still shows the summary and R restarts the scene.

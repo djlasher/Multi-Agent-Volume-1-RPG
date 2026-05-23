@@ -344,3 +344,21 @@ Current test:
 - Confirm no more than 1 orange rusher is active before 60 seconds.
 - Survive past 60 seconds and confirm up to 2 rushers can be active.
 - Confirm basic enemy spawning, XP, score, upgrades, Game Over, restart, wave scaling, and debug time skip still work.
+
+## Version 0.6 Secondary Attack Option
+
+Goal: add one alternate player attack without creating a full weapon system.
+
+Added:
+
+- E-key secondary radial burst attack.
+- Exported secondary attack damage, cooldown, and radius on the player.
+- Longer secondary cooldown than the basic attack.
+- Simple purple placeholder flash and console feedback when the burst is used.
+
+Current test:
+
+- Start a run and move near one or more enemies.
+- Press Space or left mouse click and confirm the original basic attack still works.
+- Press E and confirm nearby enemies take burst damage and the purple feedback appears.
+- Confirm E cannot be spammed because of its longer cooldown.

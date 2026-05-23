@@ -16,6 +16,7 @@ This project currently targets Godot `4.6.3`.
 
 - Arrow keys: move the player placeholder.
 - Space or left mouse click: attack.
+- E: secondary radial burst attack.
 - 1, 2, or 3: choose one of the dealt upgrade cards when the level-up prompt appears.
 - R: restart after Game Over.
 
@@ -24,6 +25,7 @@ This project currently targets Godot `4.6.3`.
 - Press Enter or Space on the start screen to begin the run.
 - The red enemy placeholder should slowly move toward the green player placeholder.
 - Press Space or left mouse click near the enemy to attack; attacks have a short cooldown.
+- Press E near enemies to use the secondary radial burst; it has a longer cooldown and shows a purple placeholder flash.
 - The enemy should briefly change color/scale and be nudged back when hit.
 - The enemy should be defeated after two successful hits.
 - The defeated count should update, and a new enemy should respawn after a short delay.

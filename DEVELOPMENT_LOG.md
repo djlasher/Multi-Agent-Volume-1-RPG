@@ -294,3 +294,16 @@ Changed:
 - Kept basic enemy spawning intact when the rusher cap is full.
 
 Result: rushers can still appear after unlock, but the early run should avoid sudden multi-rusher spikes.
+
+## 2026-05-22 - Version 0.6 Secondary Attack Option
+
+Goal: add a small alternate combat choice while preserving the existing basic attack and enemy systems.
+
+Changed:
+
+- Added an E-key radial burst attack around the player.
+- Added exported player tuning for secondary attack damage, cooldown, and radius.
+- Added simple placeholder visual feedback and console output for the burst.
+- Updated the smoke test to check the new player attack nodes.
+
+Result: combat now has a basic close-range decision without adding weapons, inventory, enemies, bosses, meta progression, or broader combat systems.

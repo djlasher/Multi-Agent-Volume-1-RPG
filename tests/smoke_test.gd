@@ -73,6 +73,10 @@ func _check_main_scene(main_scene: Node, failures: Array[String]) -> void:
 	var player := main_scene.get_node_or_null("Player")
 	if player != null and player.get_script() == null:
 		failures.append("Player is missing its script")
+	if player != null and player.get_node_or_null("SecondaryAttackArea") == null:
+		failures.append("Player is missing SecondaryAttackArea")
+	if player != null and player.get_node_or_null("SecondaryAttackArea/SecondaryAttackShape") == null:
+		failures.append("Player is missing SecondaryAttackShape")
 
 	var enemy_scene := load("res://scenes/enemy.tscn")
 	if enemy_scene == null:

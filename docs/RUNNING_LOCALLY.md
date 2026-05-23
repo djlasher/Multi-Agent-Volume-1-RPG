@@ -15,6 +15,9 @@ This project currently targets Godot `4.6.3`.
 ## Current Controls
 
 - Arrow keys: move the player placeholder.
+- Space or left mouse click: attack.
+- 1, 2, or 3: choose one of the dealt upgrade cards when the level-up prompt appears.
+- R: restart after Game Over.
 
 ## Current Gameplay Test
 
@@ -32,12 +35,15 @@ This project currently targets Godot `4.6.3`.
 - Enemies should scale over time, with faster enemies after 30 seconds and tougher enemies after 60 seconds.
 - A small blue XP pickup should appear where the enemy was defeated.
 - Touch the XP pickup to increase the XP count.
-- At 3 XP, the player should level up and choose an upgrade with 1, 2, or 3.
+- At 3 XP, or when the timed upgrade interval triggers, the player should level up and see 3 random upgrade cards.
+- The upgrade prompt should clearly say gameplay is paused until an upgrade is chosen.
+- Press 1, 2, or 3 and confirm the chosen upgrade count/latest-upgrade label updates.
+- Confirm the dealt upgrades apply real effects when selected: movement speed, attack cooldown, damage, max health, or pickup radius.
 - Move the green player placeholder into the red enemy placeholder.
 - The player should briefly flash yellow.
 - The console should print the player's remaining health.
 - When health reaches zero, a Game Over label should appear and movement should stop.
-- The run summary should show time, enemies defeated, level reached, and wave reached.
+- The run summary should show run time, final score, enemies defeated, level reached, and wave reached.
 - Press R after Game Over to restart the scene.
 
 ## Command-Line Checks

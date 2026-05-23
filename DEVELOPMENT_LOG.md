@@ -242,3 +242,17 @@ Changed:
 - Updated smoke test expected nodes and manual test steps.
 
 Result: the prototype now has a repeatable mini roguelite round loop while preserving the existing movement, combat, enemy, XP, upgrade, wave, and restart behavior.
+
+## 2026-05-22 - Version 0.2 Upgrade Choice Cards
+
+Goal: add a basic roguelite-style upgrade choice system without expanding weapons, enemies, or meta progression.
+
+Changed:
+
+- Replaced the fixed upgrade prompt with 3 random choices from a small upgrade pool.
+- Added move speed, attack speed, damage, max health, and pickup radius upgrades.
+- Added a simple upgrade count/latest-upgrade UI label.
+- Added pickup radius collection behavior for XP pickups.
+- Updated the smoke test for the new UI node.
+
+Result: timed and XP-triggered upgrades now feel closer to a roguelite card choice while preserving the existing Version 0.1 round loop.

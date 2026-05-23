@@ -9,8 +9,10 @@ enum GameState { START, PLAYING, GAME_OVER }
 @export var xp_to_level: int = 3
 @export var timed_upgrade_interval: float = 25.0
 @export var speed_upgrade_amount: float = 25.0
+@export var attack_speed_upgrade_amount: float = 0.05
 @export var attack_damage_upgrade_amount: int = 1
 @export var max_health_upgrade_amount: int = 1
+@export var pickup_radius_upgrade_amount: float = 18.0
 @export var enemies_per_wave: int = 3
 @export var base_enemy_count: int = 2
 @export var max_enemy_count: int = 6
@@ -25,6 +27,8 @@ var run_over: bool = false
 var score: int = 0
 var game_state: GameState = GameState.START
 var next_timed_upgrade_at: float = timed_upgrade_interval
+var current_upgrade_choices: Array[Dictionary] = []
+var selected_upgrades: Array[String] = []
 
 @onready var defeated_count_label: Label = $GameUI/DefeatedCountLabel
 @onready var score_label: Label = $GameUI/ScoreLabel
@@ -32,22 +36,26 @@ var next_timed_upgrade_at: float = timed_upgrade_interval
 @onready var level_label: Label = $GameUI/LevelLabel
 @onready var wave_label: Label = $GameUI/WaveLabel
 @onready var time_label: Label = $GameUI/TimeLabel
+@onready var upgrade_count_label: Label = $GameUI/UpgradeCountLabel
 @onready var start_label: Label = $GameUI/StartLabel
 @onready var level_up_label: Label = $GameUI/LevelUpLabel
 @onready var upgrade_choice_label: Label = $GameUI/UpgradeChoiceLabel
 @onready var run_summary_label: Label = $GameUI/RunSummaryLabel
+@onready var game_over_label: Label = $GameUI/GameOverLabel
 @onready var enemy_spawn_point: Node2D = $EnemySpawnPoint
 @onready var player = $Player
 @onready var enemy = $Enemy
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	randomize()
 	_update_defeated_count()
 	_update_score()
 	_update_xp_count()
 	_update_level()
 	_update_wave()
 	_update_time()
+	_update_upgrade_count()
 	_configure_enemy(enemy)
 	_fill_enemy_count()
 	get_tree().paused = true
@@ -55,6 +63,7 @@ func _ready() -> void:
 	level_up_label.visible = false
 	upgrade_choice_label.visible = false
 	run_summary_label.visible = false
+	game_over_label.visible = false
 
 func _process(delta: float) -> void:
 	if game_state != GameState.PLAYING or run_over or choosing_upgrade:
@@ -105,14 +114,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.keycode == KEY_1:
-		_apply_upgrade("Speed increased", func() -> void: player.speed += speed_upgrade_amount)
+		_select_upgrade(0)
 	elif event.keycode == KEY_2:
-		_apply_upgrade("Attack damage increased", func() -> void: player.attack_damage += attack_damage_upgrade_amount)
+		_select_upgrade(1)
 	elif event.keycode == KEY_3:
-		_apply_upgrade("Max health increased and healed", func() -> void:
-			player.max_health += max_health_upgrade_amount
-			player.health = player.max_health
-		)
+		_select_upgrade(2)
 
 func _respawn_enemy_after_delay() -> void:
 	await get_tree().create_timer(enemy_respawn_delay, false).timeout
@@ -156,7 +162,9 @@ func player_game_over() -> void:
 	run_over = true
 	game_state = GameState.GAME_OVER
 	get_tree().paused = true
-	run_summary_label.text = "Run Summary\nTime: %s\nScore: %s\nEnemies defeated: %s\nLevel reached: %s\nWave reached: %s" % [
+	game_over_label.text = "Game Over\nRun ended - press R to restart"
+	game_over_label.visible = true
+	run_summary_label.text = "Run Summary\nRun Time: %s\nFinal Score: %s\nEnemies Defeated: %s\nLevel Reached: %s\nWave Reached: %s" % [
 		_format_time(elapsed_time),
 		score,
 		enemies_defeated,
@@ -166,7 +174,7 @@ func player_game_over() -> void:
 	run_summary_label.visible = true
 
 func _update_defeated_count() -> void:
-	defeated_count_label.text = "Enemies defeated: %s" % enemies_defeated
+	defeated_count_label.text = "Defeated: %s" % enemies_defeated
 
 func _update_score() -> void:
 	score_label.text = "Score: %s" % score
@@ -181,7 +189,13 @@ func _update_wave() -> void:
 	wave_label.text = "Wave: %s" % wave
 
 func _update_time() -> void:
-	time_label.text = "Time: %s" % _format_time(elapsed_time)
+	time_label.text = "Run Time: %s" % _format_time(elapsed_time)
+
+func _update_upgrade_count() -> void:
+	var latest := "None"
+	if not selected_upgrades.is_empty():
+		latest = selected_upgrades[selected_upgrades.size() - 1]
+	upgrade_count_label.text = "Upgrades: %s | Latest: %s" % [selected_upgrades.size(), latest]
 
 func _format_time(time_seconds: float) -> String:
 	var total_seconds := int(time_seconds)
@@ -206,25 +220,92 @@ func _start_upgrade_choice() -> void:
 	if choosing_upgrade:
 		return
 
+	# Main keeps processing while paused so number-key upgrade choices can resume the run.
 	level += 1
 	xp = 0
 	choosing_upgrade = true
 	next_timed_upgrade_at = elapsed_time + timed_upgrade_interval
+	current_upgrade_choices = _deal_upgrade_choices()
 	get_tree().paused = true
 	upgrade_choice_label.visible = true
 	level_up_label.visible = true
+	level_up_label.text = "Level %s Reached\nGame Paused" % level
+	upgrade_choice_label.text = _format_upgrade_choices()
 	_update_level()
 	_update_xp_count()
-	print("Level up! Choose an upgrade with 1, 2, or 3.")
+	print("Level up! Gameplay paused. Choose one of the dealt upgrades with 1, 2, or 3.")
 
-func _apply_upgrade(message: String, apply_upgrade: Callable) -> void:
-	apply_upgrade.call()
+func _deal_upgrade_choices() -> Array[Dictionary]:
+	var pool := _upgrade_pool()
+	pool.shuffle()
+	return pool.slice(0, 3)
+
+func _upgrade_pool() -> Array[Dictionary]:
+	return [
+		{
+			"id": "move_speed",
+			"name": "Move Speed Up",
+			"description": "+%s move speed" % speed_upgrade_amount,
+		},
+		{
+			"id": "attack_speed",
+			"name": "Attack Speed Up",
+			"description": "Shorter attack cooldown",
+		},
+		{
+			"id": "damage",
+			"name": "Damage Up",
+			"description": "+%s attack damage" % attack_damage_upgrade_amount,
+		},
+		{
+			"id": "max_health",
+			"name": "Max Health Up",
+			"description": "+%s max health and heal" % max_health_upgrade_amount,
+		},
+		{
+			"id": "pickup_radius",
+			"name": "Pickup Radius Up",
+			"description": "+%s pickup radius" % pickup_radius_upgrade_amount,
+		},
+	]
+
+func _format_upgrade_choices() -> String:
+	var lines: Array[String] = ["GAME PAUSED - Choose an upgrade card"]
+	for index in range(current_upgrade_choices.size()):
+		var choice := current_upgrade_choices[index]
+		lines.append("%s - %s" % [index + 1, choice["name"]])
+		lines.append("    %s" % choice["description"])
+	return "\n".join(lines)
+
+func _select_upgrade(choice_index: int) -> void:
+	if choice_index >= current_upgrade_choices.size():
+		return
+
+	var choice := current_upgrade_choices[choice_index]
+	_apply_upgrade(choice)
+
+func _apply_upgrade(choice: Dictionary) -> void:
+	match choice["id"]:
+		"move_speed":
+			player.speed += speed_upgrade_amount
+		"attack_speed":
+			player.attack_cooldown = max(0.12, player.attack_cooldown - attack_speed_upgrade_amount)
+		"damage":
+			player.attack_damage += attack_damage_upgrade_amount
+		"max_health":
+			player.max_health += max_health_upgrade_amount
+			player.health = player.max_health
+		"pickup_radius":
+			player.pickup_radius += pickup_radius_upgrade_amount
+
+	selected_upgrades.append(choice["name"])
 	choosing_upgrade = false
 	get_tree().paused = false
 	upgrade_choice_label.visible = false
-	level_up_label.text = "Level %s: %s" % [level, message]
+	level_up_label.text = "Level %s Upgrade: %s\nRun Resumed" % [level, choice["name"]]
 	level_up_label.visible = true
-	print("Upgrade selected: %s" % message)
+	_update_upgrade_count()
+	print("Upgrade selected: %s" % choice["name"])
 
 func _start_run() -> void:
 	game_state = GameState.PLAYING

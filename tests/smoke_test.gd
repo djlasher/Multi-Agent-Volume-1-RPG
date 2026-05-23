@@ -21,6 +21,7 @@ const REQUIRED_NODES := [
 	"GameUI/LevelLabel",
 	"GameUI/WaveLabel",
 	"GameUI/TimeLabel",
+	"GameUI/UpgradeCountLabel",
 	"GameUI/StartLabel",
 	"GameUI/UpgradeChoiceLabel",
 	"GameUI/RunSummaryLabel",

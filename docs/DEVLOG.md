@@ -274,3 +274,21 @@ Current test:
 - Confirm the timer and score update only during active play.
 - Survive long enough to see the timed upgrade choice.
 - Confirm Game Over still shows the summary and R restarts the scene.
+
+## Version 0.2 Upgrade Choice Cards
+
+Goal: replace the fixed upgrade prompt with a small roguelite-style choice card loop.
+
+Added:
+
+- Randomly dealt sets of 3 upgrade choices from a 5-upgrade pool.
+- Real effects for move speed, attack speed, damage, max health, and pickup radius upgrades.
+- A simple upgrade count/latest-upgrade label.
+- Pickup radius collection so XP can be collected from slightly farther away after upgrading.
+
+Current test:
+
+- Start a run and collect 3 XP, or survive until the timed upgrade interval.
+- Confirm gameplay pauses and 3 random upgrade cards appear.
+- Press 1, 2, or 3 and confirm gameplay resumes.
+- Confirm the upgrade count/latest label updates and the selected upgrade affects play.

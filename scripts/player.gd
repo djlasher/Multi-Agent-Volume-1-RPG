@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var max_health: int = 3
 @export var attack_damage: int = 1
 @export var attack_cooldown: float = 0.35
+@export var pickup_radius: float = 20.0
 
 var health: int = max_health
 var hit_flash_time: float = 0.0

@@ -35,7 +35,7 @@ offset_left=16.0
 offset_top=16.0
 offset_right=220.0
 offset_bottom=42.0
-text="Enemies defeated: 0"
+text="Defeated: 0"
 
 [node name="ScoreLabel" type="Label" parent="GameUI"]
 offset_left=16.0
@@ -70,47 +70,61 @@ offset_left=16.0
 offset_top=156.0
 offset_right=220.0
 offset_bottom=182.0
-text="Time: 00:00"
+text="Run Time: 00:00"
+
+[node name="UpgradeCountLabel" type="Label" parent="GameUI"]
+offset_left=16.0
+offset_top=184.0
+offset_right=360.0
+offset_bottom=210.0
+text="Upgrades: 0 | Latest: None"
 
 [node name="StartLabel" type="Label" parent="GameUI"]
-offset_left=260.0
-offset_top=150.0
-offset_right=700.0
-offset_bottom=250.0
+offset_left=210.0
+offset_top=126.0
+offset_right=750.0
+offset_bottom=294.0
 text="Mini Roguelite Prototype
-Press Enter or Space to Start"
+Enter/Space: Start Run
+Arrow Keys: Move
+Space or Left Click: Attack
+Choose upgrade cards with 1, 2, or 3"
 horizontal_alignment=1
 vertical_alignment=1
 
 [node name="LevelUpLabel" type="Label" parent="GameUI"]
 visible=false
 offset_left=324.0
-offset_top=120.0
+offset_top=104.0
 offset_right=636.0
-offset_bottom=168.0
-text="Level Up!"
+offset_bottom=166.0
+text="Level Up!
+Game Paused"
 horizontal_alignment=1
 vertical_alignment=1
 
 [node name="UpgradeChoiceLabel" type="Label" parent="GameUI"]
 visible=false
-offset_left=260.0
-offset_top=170.0
-offset_right=700.0
-offset_bottom=260.0
-text="Choose Upgrade
-1 - Increase movement speed
-2 - Increase attack damage
-3 - Increase max health and heal"
+offset_left=180.0
+offset_top=168.0
+offset_right=780.0
+offset_bottom=332.0
+text="GAME PAUSED - Choose an upgrade card
+1 - Move Speed Up
+    +25 move speed
+2 - Damage Up
+    +1 attack damage
+3 - Max Health Up
+    +1 max health and heal"
 horizontal_alignment=1
 vertical_alignment=1
 
 [node name="RunSummaryLabel" type="Label" parent="GameUI"]
 visible=false
-offset_left=300.0
+offset_left=260.0
 offset_top=320.0
-offset_right=660.0
-offset_bottom=440.0
+offset_right=700.0
+offset_bottom=460.0
 text="Run Summary"
 horizontal_alignment=1
 vertical_alignment=1
@@ -122,6 +136,6 @@ offset_top=222.0
 offset_right=636.0
 offset_bottom=318.0
 text="Game Over
-Press R to Restart"
+Run ended - press R to restart"
 horizontal_alignment=1
 vertical_alignment=1

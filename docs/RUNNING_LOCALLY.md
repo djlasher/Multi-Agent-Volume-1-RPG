@@ -31,6 +31,7 @@ This project currently targets Godot `4.6.3`.
 - Press E near enemies to use the secondary radial burst; it has a longer cooldown and shows a purple placeholder flash.
 - Confirm the secondary burst plays a distinct placeholder sound.
 - The enemy should briefly change color/scale and be nudged back when hit.
+- Confirm yellow floating damage text appears above damaged enemies.
 - The enemy should be defeated after two successful hits.
 - Confirm enemy defeat plays a placeholder sound.
 - The defeated count should update, and a new enemy should respawn after a short delay.
@@ -48,9 +49,11 @@ This project currently targets Godot `4.6.3`.
 - A small green health pickup can sometimes drop from defeated enemies.
 - Touch the XP pickup to increase the XP count.
 - Touch the health pickup to restore 1 health, capped at max health; the console should print the healing result.
+- Confirm green floating heal text appears when collecting health.
 - Confirm XP and health pickup collection play a placeholder pickup sound.
 - At 3 XP, or when the timed upgrade interval triggers, the player should level up and see 3 random upgrade cards.
 - The upgrade prompt should clearly say gameplay is paused until an upgrade is chosen.
+- Confirm upgrade and milestone prompts get a small color emphasis.
 - Press 1, 2, or 3 and confirm the chosen upgrade count/latest-upgrade label updates.
 - Confirm the dealt upgrades apply real effects when selected: movement speed, attack cooldown, damage, max health, pickup radius, secondary burst damage/cooldown/radius, or health pickup drop chance.
 - Move the green player placeholder into the red enemy placeholder.

@@ -82,6 +82,10 @@ func heal(amount: int) -> void:
 
 	var previous_health := health
 	health = min(health + amount, max_health)
+	var healed_amount := health - previous_health
+	if get_tree().current_scene.has_method("show_floating_text"):
+		var message := "+%s HP" % healed_amount if healed_amount > 0 else "HP FULL"
+		get_tree().current_scene.show_floating_text(message, global_position, Color(0.35, 1.0, 0.45, 1))
 	print("Player healed: %s -> %s/%s" % [previous_health, health, max_health])
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -373,3 +373,17 @@ Changed:
 - Updated smoke test coverage and audio manual test docs.
 
 Result: core actions now have lightweight sound feedback while preserving the current gameplay systems.
+
+## 2026-05-22 - Version 1.2 Visual Feedback Polish
+
+Goal: improve readability for hits, healing, and reward moments without changing gameplay systems.
+
+Changed:
+
+- Added a small reusable floating text script.
+- Added floating damage text when enemies take damage.
+- Added floating heal text when health pickups restore or attempt to restore health.
+- Added color emphasis to upgrade and milestone prompts.
+- Updated smoke test coverage and visual feedback manual test docs.
+
+Result: combat and recovery feedback are easier to read while preserving existing combat, pickup, upgrade, and milestone behavior.

@@ -450,3 +450,19 @@ Current test:
 - Start a run and confirm basic attack, secondary burst, enemy defeat, XP/health pickup collection, and player damage each play a short placeholder sound.
 - Toggle `audio_enabled` off on `AudioFeedback` and confirm sounds stop.
 - Adjust `master_volume_db` on `AudioFeedback` and confirm volume changes.
+
+## Version 1.2 Visual Feedback Polish
+
+Goal: make hits, healing, and reward moments easier to read without adding gameplay systems.
+
+Added:
+
+- Floating yellow damage text when enemies take damage.
+- Floating green heal text when the player collects health.
+- Small color emphasis on upgrade and milestone prompts.
+
+Current test:
+
+- Hit enemies with basic or secondary attacks and confirm damage text floats upward.
+- Collect a health pickup and confirm heal text floats upward.
+- Trigger an upgrade or milestone reward and confirm the prompt gets a small color emphasis.

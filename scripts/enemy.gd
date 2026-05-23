@@ -51,6 +51,7 @@ func take_damage(amount: int) -> void:
 
 	health = max(health - amount, 0)
 	_show_hit_feedback()
+	_show_floating_text("-%s" % amount, Color(1.0, 0.9, 0.25, 1))
 	print("Enemy health: %s/%s" % [health, max_health])
 
 	if health == 0:
@@ -96,3 +97,7 @@ func _play_audio(method_name: String) -> void:
 	var audio_feedback := get_tree().current_scene.get_node_or_null("AudioFeedback")
 	if audio_feedback != null and audio_feedback.has_method(method_name):
 		audio_feedback.call(method_name)
+
+func _show_floating_text(message: String, text_color: Color) -> void:
+	if get_tree().current_scene.has_method("show_floating_text"):
+		get_tree().current_scene.show_floating_text(message, global_position, text_color)

@@ -4,6 +4,7 @@ const ENEMY_SCENE := preload("res://scenes/enemy.tscn")
 const RUSHER_ENEMY_SCENE := preload("res://scenes/rusher_enemy.tscn")
 const XP_PICKUP_SCENE := preload("res://scenes/xp_pickup.tscn")
 const HEALTH_PICKUP_SCENE := preload("res://scenes/health_pickup.tscn")
+const FLOATING_TEXT_SCRIPT := preload("res://scripts/floating_text.gd")
 
 enum GameState { START, PLAYING, GAME_OVER }
 
@@ -32,6 +33,7 @@ enum GameState { START, PLAYING, GAME_OVER }
 @export var health_pickup_drop_chance: float = 0.25
 @export var milestone_time: float = 60.0
 @export var milestone_score_bonus: int = 500
+@export var floating_text_enabled: bool = true
 @export var debug_enable_rusher_time_skip: bool = false
 
 var enemies_defeated: int = 0
@@ -272,6 +274,16 @@ func _update_upgrade_count() -> void:
 func _update_status(message: String) -> void:
 	status_label.text = message
 
+func show_floating_text(message: String, world_position: Vector2, text_color: Color) -> void:
+	if not floating_text_enabled:
+		return
+
+	var label := Label.new()
+	label.set_script(FLOATING_TEXT_SCRIPT)
+	label.position = world_position + Vector2(-18, -32)
+	label.call("setup", message, text_color)
+	add_child(label)
+
 func _upgrade_summary() -> String:
 	if selected_upgrades.is_empty():
 		return "None selected"
@@ -301,6 +313,7 @@ func _award_survival_milestone() -> void:
 	score += milestone_score_bonus
 	_update_score()
 	_update_status("Milestone reached: %s seconds survived. Choose a reward." % int(milestone_time))
+	_emphasize_prompt(Color(1.0, 0.88, 0.25, 1))
 	print("Milestone reached: %s seconds survived! +%s score" % [int(milestone_time), milestone_score_bonus])
 	_start_upgrade_choice("Milestone reached: %s seconds survived!\n+%s bonus score\nGame Paused" % [int(milestone_time), milestone_score_bonus])
 
@@ -322,6 +335,8 @@ func _start_upgrade_choice(prompt_text: String = "") -> void:
 	else:
 		level_up_label.text = prompt_text
 	upgrade_choice_label.text = _format_upgrade_choices()
+	if prompt_text == "":
+		_emphasize_prompt(Color(0.45, 0.85, 1.0, 1))
 	_update_status("Game paused. Choose upgrade 1, 2, or 3.")
 	_update_level()
 	_update_xp_count()
@@ -425,6 +440,7 @@ func _apply_upgrade(choice: Dictionary) -> void:
 	get_tree().paused = false
 	upgrade_choice_label.visible = false
 	level_up_label.text = "Level %s Upgrade: %s\nRun Resumed" % [level, choice["name"]]
+	level_up_label.modulate = Color(0.65, 1.0, 0.65, 1)
 	level_up_label.visible = true
 	_update_upgrade_count()
 	_update_status("Objective: survive, collect XP, and reach the next reward.")
@@ -434,5 +450,11 @@ func _start_run() -> void:
 	game_state = GameState.PLAYING
 	get_tree().paused = false
 	start_label.visible = false
+	level_up_label.modulate = Color.WHITE
+	upgrade_choice_label.modulate = Color.WHITE
 	_update_status("Objective: survive 60 seconds, collect XP, and choose upgrades.")
 	print("Run started")
+
+func _emphasize_prompt(prompt_color: Color) -> void:
+	level_up_label.modulate = prompt_color
+	upgrade_choice_label.modulate = Color(1.0, 1.0, 0.9, 1)

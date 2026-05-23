@@ -9,6 +9,7 @@ const REQUIRED_RESOURCES := [
 	"res://scenes/health_pickup.tscn",
 	"res://scripts/main.gd",
 	"res://scripts/audio_feedback.gd",
+	"res://scripts/floating_text.gd",
 	"res://scripts/player.gd",
 	"res://scripts/enemy.gd",
 	"res://scripts/xp_pickup.gd",

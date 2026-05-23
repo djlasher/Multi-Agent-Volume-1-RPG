@@ -15,6 +15,11 @@ enum GameState { START, PLAYING, GAME_OVER }
 @export var attack_damage_upgrade_amount: int = 1
 @export var max_health_upgrade_amount: int = 1
 @export var pickup_radius_upgrade_amount: float = 18.0
+@export var secondary_damage_upgrade_amount: int = 1
+@export var secondary_cooldown_upgrade_amount: float = 0.25
+@export var secondary_radius_upgrade_amount: float = 16.0
+@export var health_drop_chance_upgrade_amount: float = 0.1
+@export var max_health_pickup_drop_chance: float = 0.75
 @export var enemies_per_wave: int = 3
 @export var base_enemy_count: int = 1
 @export var max_enemy_count: int = 5
@@ -308,7 +313,7 @@ func _upgrade_pool() -> Array[Dictionary]:
 		{
 			"id": "attack_speed",
 			"name": "Attack Speed Up",
-			"description": "Shorter attack cooldown",
+			"description": "-%ss basic attack cooldown" % attack_speed_upgrade_amount,
 		},
 		{
 			"id": "damage",
@@ -324,6 +329,26 @@ func _upgrade_pool() -> Array[Dictionary]:
 			"id": "pickup_radius",
 			"name": "Pickup Radius Up",
 			"description": "+%s pickup radius" % pickup_radius_upgrade_amount,
+		},
+		{
+			"id": "secondary_damage",
+			"name": "Secondary Damage Up",
+			"description": "+%s secondary burst damage" % secondary_damage_upgrade_amount,
+		},
+		{
+			"id": "secondary_cooldown",
+			"name": "Secondary Cooldown Down",
+			"description": "-%ss secondary burst cooldown" % secondary_cooldown_upgrade_amount,
+		},
+		{
+			"id": "secondary_radius",
+			"name": "Secondary Radius Up",
+			"description": "+%s secondary burst radius" % secondary_radius_upgrade_amount,
+		},
+		{
+			"id": "health_drop_chance",
+			"name": "Health Drop Chance Up",
+			"description": "+%s%% health pickup drop chance" % int(health_drop_chance_upgrade_amount * 100),
 		},
 	]
 
@@ -355,6 +380,15 @@ func _apply_upgrade(choice: Dictionary) -> void:
 			player.health = player.max_health
 		"pickup_radius":
 			player.pickup_radius += pickup_radius_upgrade_amount
+		"secondary_damage":
+			player.secondary_attack_damage += secondary_damage_upgrade_amount
+		"secondary_cooldown":
+			player.secondary_attack_cooldown = max(0.75, player.secondary_attack_cooldown - secondary_cooldown_upgrade_amount)
+		"secondary_radius":
+			player.secondary_attack_radius += secondary_radius_upgrade_amount
+			player.refresh_secondary_attack_radius()
+		"health_drop_chance":
+			health_pickup_drop_chance = min(max_health_pickup_drop_chance, health_pickup_drop_chance + health_drop_chance_upgrade_amount)
 
 	selected_upgrades.append(choice["name"])
 	choosing_upgrade = false

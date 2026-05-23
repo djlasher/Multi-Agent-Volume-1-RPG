@@ -45,7 +45,7 @@ This project currently targets Godot `4.6.3`.
 - At 3 XP, or when the timed upgrade interval triggers, the player should level up and see 3 random upgrade cards.
 - The upgrade prompt should clearly say gameplay is paused until an upgrade is chosen.
 - Press 1, 2, or 3 and confirm the chosen upgrade count/latest-upgrade label updates.
-- Confirm the dealt upgrades apply real effects when selected: movement speed, attack cooldown, damage, max health, or pickup radius.
+- Confirm the dealt upgrades apply real effects when selected: movement speed, attack cooldown, damage, max health, pickup radius, secondary burst damage/cooldown/radius, or health pickup drop chance.
 - Move the green player placeholder into the red enemy placeholder.
 - The player should briefly flash yellow.
 - The console should print the player's remaining health.

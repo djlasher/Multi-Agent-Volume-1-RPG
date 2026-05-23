@@ -320,3 +320,16 @@ Changed:
 - Added console healing feedback and smoke test coverage for the new pickup.
 
 Result: players can recover during a run while the existing XP, score, upgrade, enemy, wave, and game-over loops remain intact.
+
+## 2026-05-22 - Version 0.8 Expanded Upgrade Pool
+
+Goal: broaden level-up decisions using existing secondary attack and recovery systems.
+
+Changed:
+
+- Added secondary burst damage, cooldown, and radius upgrades to the existing upgrade pool.
+- Added a health pickup drop chance upgrade with a cap.
+- Added a player method to refresh secondary burst collision/visual size after radius upgrades.
+- Included the generated UID sidecar for the health pickup script.
+
+Result: level-up choices now cover primary combat, secondary combat, pickup utility, and recovery without adding new weapons, enemies, shops, inventory, or meta progression.

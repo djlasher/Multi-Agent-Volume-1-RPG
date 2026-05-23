@@ -379,3 +379,21 @@ Current test:
 - Take damage from an enemy, then defeat enemies until a green health pickup drops.
 - Touch or move near the green pickup and confirm health restores by 1 without exceeding max health.
 - Confirm blue XP pickups, score, upgrades, Game Over, restart, waves, and enemy spawning still work.
+
+## Version 0.8 Expanded Upgrade Pool
+
+Goal: make level-up choices more interesting by adding secondary attack and survival upgrades.
+
+Added:
+
+- Secondary Damage Up for stronger E-key bursts.
+- Secondary Cooldown Down with a minimum cooldown.
+- Secondary Radius Up that updates burst collision and visual size.
+- Health Drop Chance Up with a capped health pickup drop chance.
+
+Current test:
+
+- Trigger several level-up choices through XP or timed upgrades.
+- Confirm the new upgrade cards can appear alongside existing upgrades.
+- Select each new upgrade when available and confirm it changes secondary burst damage, cooldown, radius, or health pickup drop chance.
+- Confirm existing upgrades, XP, health pickups, enemies, Game Over, restart, and score still work.

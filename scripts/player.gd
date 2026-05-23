@@ -28,6 +28,9 @@ var game_over: bool = false
 func _ready() -> void:
 	_update_secondary_attack_shape()
 
+func refresh_secondary_attack_radius() -> void:
+	_update_secondary_attack_shape()
+
 func _physics_process(_delta: float) -> void:
 	if game_over:
 		velocity = Vector2.ZERO

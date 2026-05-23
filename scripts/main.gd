@@ -1,6 +1,7 @@
 extends Node2D
 
 const ENEMY_SCENE := preload("res://scenes/enemy.tscn")
+const RUSHER_ENEMY_SCENE := preload("res://scenes/rusher_enemy.tscn")
 const XP_PICKUP_SCENE := preload("res://scenes/xp_pickup.tscn")
 
 enum GameState { START, PLAYING, GAME_OVER }
@@ -16,6 +17,8 @@ enum GameState { START, PLAYING, GAME_OVER }
 @export var enemies_per_wave: int = 3
 @export var base_enemy_count: int = 2
 @export var max_enemy_count: int = 6
+@export var rusher_enemy_unlock_time: float = 35.0
+@export var rusher_enemy_spawn_chance: float = 0.35
 
 var enemies_defeated: int = 0
 var xp: int = 0
@@ -130,11 +133,16 @@ func _fill_enemy_count() -> void:
 		_spawn_enemy()
 
 func _spawn_enemy() -> void:
-	var new_enemy := ENEMY_SCENE.instantiate()
+	var new_enemy := _enemy_scene_for_spawn().instantiate()
 	var spawn_index := get_tree().get_nodes_in_group("enemies").size()
 	new_enemy.position = _spawn_position_for_index(spawn_index)
 	_configure_enemy(new_enemy)
 	add_child(new_enemy)
+
+func _enemy_scene_for_spawn() -> PackedScene:
+	if elapsed_time >= rusher_enemy_unlock_time and randf() < rusher_enemy_spawn_chance:
+		return RUSHER_ENEMY_SCENE
+	return ENEMY_SCENE
 
 func _target_enemy_count() -> int:
 	return min(base_enemy_count + wave - 1, max_enemy_count)

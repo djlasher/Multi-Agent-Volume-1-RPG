@@ -3,18 +3,22 @@ extends Area2D
 @export var speed: float = 45.0
 @export var max_health: int = 2
 @export var knockback_strength: float = 140.0
+@export var enemy_variant: String = "basic"
 
 var player: Node2D
 var health: int = max_health
 var defeated: bool = false
 var hit_feedback_time: float = 0.0
 var knockback_velocity: Vector2 = Vector2.ZERO
+var base_color := Color(0.82, 0.18, 0.18, 1)
+var base_scale := Vector2.ONE
 
 @onready var body: ColorRect = $Body
 
 func _ready() -> void:
 	add_to_group("enemies")
 	player = get_tree().current_scene.get_node_or_null("Player")
+	_apply_variant_visuals()
 	body_entered.connect(_on_body_entered)
 
 func _physics_process(delta: float) -> void:
@@ -24,8 +28,8 @@ func _physics_process(delta: float) -> void:
 	if hit_feedback_time > 0.0:
 		hit_feedback_time -= delta
 		if hit_feedback_time <= 0.0:
-			body.color = Color(0.82, 0.18, 0.18, 1)
-			scale = Vector2.ONE
+			body.color = base_color
+			scale = base_scale
 
 	if knockback_velocity.length() > 1.0:
 		global_position += knockback_velocity * delta
@@ -62,11 +66,27 @@ func configure_for_wave(wave: int) -> void:
 func configure_for_difficulty(wave: int, time_tier: int) -> void:
 	speed = 45.0 + ((wave - 1) * 10.0) + (time_tier * 15.0)
 	max_health = 2 + (wave - 1) + time_tier
+	if enemy_variant == "rusher":
+		speed += 35.0
+		max_health = max(1, max_health - 1)
 	health = max_health
+	_apply_variant_visuals()
 
 func _show_hit_feedback() -> void:
 	body.color = Color(1.0, 0.78, 0.25, 1)
-	scale = Vector2(1.12, 1.12)
+	scale = base_scale * 1.12
 	hit_feedback_time = 0.12
 	if player != null:
 		knockback_velocity = player.global_position.direction_to(global_position) * knockback_strength
+
+func _apply_variant_visuals() -> void:
+	if enemy_variant == "rusher":
+		base_color = Color(1.0, 0.48, 0.12, 1)
+		base_scale = Vector2(0.82, 0.82)
+	else:
+		base_color = Color(0.82, 0.18, 0.18, 1)
+		base_scale = Vector2.ONE
+
+	if body != null:
+		body.color = base_color
+	scale = base_scale

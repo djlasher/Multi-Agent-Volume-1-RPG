@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://rusher_enemy_placeholder"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_enemy_script"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size=Vector2(28, 28)
+
+[node name="RusherEnemy" type="Area2D"]
+process_mode=1
+script=ExtResource("1_enemy_script")
+enemy_variant="rusher"
+
+[node name="Body" type="ColorRect" parent="."]
+offset_left=-14.0
+offset_top=-14.0
+offset_right=14.0
+offset_bottom=14.0
+color=Color(1, 0.48, 0.12, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape=SubResource("1")

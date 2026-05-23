@@ -4,6 +4,7 @@ const REQUIRED_RESOURCES := [
 	"res://scenes/main.tscn",
 	"res://scenes/player.tscn",
 	"res://scenes/enemy.tscn",
+	"res://scenes/rusher_enemy.tscn",
 	"res://scenes/xp_pickup.tscn",
 	"res://scripts/main.gd",
 	"res://scripts/player.gd",
@@ -84,6 +85,18 @@ func _check_main_scene(main_scene: Node, failures: Array[String]) -> void:
 			failures.append("Enemy is missing its script")
 		if enemy != null:
 			enemy.free()
+
+	var rusher_enemy_scene := load("res://scenes/rusher_enemy.tscn")
+	if rusher_enemy_scene == null:
+		failures.append("Could not load rusher enemy scene")
+	else:
+		var rusher_enemy: Node = rusher_enemy_scene.instantiate()
+		if rusher_enemy == null:
+			failures.append("Could not instantiate rusher enemy scene")
+		elif rusher_enemy.get_script() == null:
+			failures.append("Rusher enemy is missing its script")
+		if rusher_enemy != null:
+			rusher_enemy.free()
 
 	var xp_pickup_scene := load("res://scenes/xp_pickup.tscn")
 	if xp_pickup_scene == null:

@@ -256,3 +256,16 @@ Changed:
 - Updated the smoke test for the new UI node.
 
 Result: timed and XP-triggered upgrades now feel closer to a roguelite card choice while preserving the existing Version 0.1 round loop.
+
+## 2026-05-22 - Version 0.3 Enemy Variety
+
+Goal: add one enemy variant while keeping the existing combat, XP, score, upgrade, game-over, and restart loops intact.
+
+Changed:
+
+- Added a rusher enemy scene that shares the existing enemy script.
+- Added rusher-specific speed, health, color, and scale behavior.
+- Added time-gated rusher spawning after roughly 35 seconds of active run time.
+- Updated the smoke test to cover the new enemy scene.
+
+Result: runs now gain a small amount of enemy variety after the opening stretch without adding bosses, new weapons, meta progression, or a larger spawn system.

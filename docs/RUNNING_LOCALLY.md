@@ -33,6 +33,7 @@ This project currently targets Godot `4.6.3`.
 - The run timer should count up during active gameplay and stop on Game Over.
 - The score should increase when enemies are defeated.
 - Enemies should scale over time, with faster enemies after 30 seconds and tougher enemies after 60 seconds.
+- After about 35 seconds, orange rusher enemies can begin spawning; they should move faster and have lower health than the basic red enemies.
 - A small blue XP pickup should appear where the enemy was defeated.
 - Touch the XP pickup to increase the XP count.
 - At 3 XP, or when the timed upgrade interval triggers, the player should level up and see 3 random upgrade cards.

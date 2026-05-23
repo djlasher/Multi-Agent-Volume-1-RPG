@@ -292,3 +292,21 @@ Current test:
 - Confirm gameplay pauses and 3 random upgrade cards appear.
 - Press 1, 2, or 3 and confirm gameplay resumes.
 - Confirm the upgrade count/latest label updates and the selected upgrade affects play.
+
+## Version 0.3 Enemy Variety
+
+Goal: add one small enemy variant without changing the core round loop.
+
+Added:
+
+- A rusher enemy scene that reuses the existing enemy script.
+- Faster, lower-health rusher behavior.
+- Orange color and smaller scale so rushers read differently from basic red enemies.
+- Time-gated rusher spawning after the run has been active for about 35 seconds.
+
+Current test:
+
+- Start a run and survive past 35 seconds.
+- Defeat enemies until an orange rusher appears.
+- Confirm rushers move faster, take fewer hits than similarly scaled basic enemies, and still grant score/XP on defeat.
+- Confirm Game Over, restart, upgrades, wave scaling, and basic enemy spawns still work.

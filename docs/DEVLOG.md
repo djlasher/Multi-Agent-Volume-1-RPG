@@ -327,3 +327,20 @@ Current test:
 - Survive to about 32 seconds and confirm rushers can begin appearing.
 - In the editor, enable `debug_enable_rusher_time_skip` on `Main`, start a run, press F6, and confirm the timer jumps near rusher unlock.
 - Confirm F6 does nothing in normal play when the debug flag is disabled.
+
+## Version 0.5 Rusher Spawn Smoothing
+
+Goal: keep rusher enemies exciting without letting several spawn immediately after unlock.
+
+Added:
+
+- Active rusher cap support in the existing spawn selection.
+- A cap of 1 active rusher from unlock until 60 seconds.
+- A cap of 2 active rushers after 60 seconds.
+
+Current test:
+
+- Start a run and survive until rushers unlock around 32 seconds.
+- Confirm no more than 1 orange rusher is active before 60 seconds.
+- Survive past 60 seconds and confirm up to 2 rushers can be active.
+- Confirm basic enemy spawning, XP, score, upgrades, Game Over, restart, wave scaling, and debug time skip still work.

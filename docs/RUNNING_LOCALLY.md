@@ -35,6 +35,7 @@ This project currently targets Godot `4.6.3`.
 - Enemies should scale over time, with faster enemies after 30 seconds and tougher enemies after 60 seconds.
 - After about 35 seconds, orange rusher enemies can begin spawning; they should move faster and have lower health than the basic red enemies.
 - Current Version 0.4 tuning starts with 1 enemy, 5 player health, a slightly slower respawn, and rushers unlocked at about 32 seconds.
+- Version 0.5 caps active rushers at 1 until 60 seconds, then allows up to 2 active rushers.
 - A small blue XP pickup should appear where the enemy was defeated.
 - Touch the XP pickup to increase the XP count.
 - At 3 XP, or when the timed upgrade interval triggers, the player should level up and see 3 random upgrade cards.

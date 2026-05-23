@@ -282,3 +282,15 @@ Changed:
 - Documented the debug/manual testing flow.
 
 Result: manual playtests can more reliably reach rusher enemies while normal runs keep the existing combat, XP, score, upgrade, wave, game-over, and restart loops.
+
+## 2026-05-22 - Version 0.5 Rusher Spawn Smoothing
+
+Goal: prevent early rusher clusters while preserving the existing rusher spawn chance and basic enemy fallback.
+
+Changed:
+
+- Added active rusher counting.
+- Added time-based rusher caps: 1 active rusher before 60 seconds, 2 active rushers after 60 seconds.
+- Kept basic enemy spawning intact when the rusher cap is full.
+
+Result: rushers can still appear after unlock, but the early run should avoid sudden multi-rusher spikes.

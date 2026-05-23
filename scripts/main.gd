@@ -19,6 +19,9 @@ enum GameState { START, PLAYING, GAME_OVER }
 @export var max_enemy_count: int = 5
 @export var rusher_enemy_unlock_time: float = 32.0
 @export var rusher_enemy_spawn_chance: float = 0.45
+@export var early_rusher_cap: int = 1
+@export var late_rusher_cap: int = 2
+@export var late_rusher_cap_time: float = 60.0
 @export var starting_player_health: int = 5
 @export var debug_enable_rusher_time_skip: bool = false
 
@@ -147,9 +150,24 @@ func _spawn_enemy() -> void:
 	add_child(new_enemy)
 
 func _enemy_scene_for_spawn() -> PackedScene:
-	if elapsed_time >= rusher_enemy_unlock_time and randf() < rusher_enemy_spawn_chance:
+	if _can_spawn_rusher() and randf() < rusher_enemy_spawn_chance:
 		return RUSHER_ENEMY_SCENE
 	return ENEMY_SCENE
+
+func _can_spawn_rusher() -> bool:
+	return elapsed_time >= rusher_enemy_unlock_time and _active_rusher_count() < _current_rusher_cap()
+
+func _active_rusher_count() -> int:
+	var count := 0
+	for enemy_node in get_tree().get_nodes_in_group("enemies"):
+		if enemy_node.get("enemy_variant") == "rusher":
+			count += 1
+	return count
+
+func _current_rusher_cap() -> int:
+	if elapsed_time >= late_rusher_cap_time:
+		return late_rusher_cap
+	return early_rusher_cap
 
 func _target_enemy_count() -> int:
 	return min(base_enemy_count + wave - 1, max_enemy_count)
